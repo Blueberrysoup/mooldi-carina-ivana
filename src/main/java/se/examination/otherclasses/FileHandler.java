@@ -60,6 +60,34 @@ public class FileHandler {
 	 * @param game The current DivGame object
 	 */
 	public void saveDivGameToFile(Player player, DivGame game){
+		int points = player.getPoints();
+		int completed = player.getCompleted();
+		int[][] resultArr = game.getResultArr();
+		String fileName = "gamefiles/" + player.getName() + "_div.txt";
+		File file = new File(fileName);
+		try{
+			//file.mkdir();		TODO! Mappen ska skapas om den inte finns
+			file.createNewFile();
+		
+			FileWriter writer = new FileWriter(file);
+			
+			writer.write(points+"\n");
+						writer.write(completed+"\n");
+			
+			for (int x = 0; x < 13; x++){
+				for (int y = 0; y < 13; y++){
+					writer.write(resultArr[x][y]+"\n");
+				}
+			}
+			
+			writer.flush();
+			writer.close();
+		
+		} catch(IOException e){
+			System.out.println(e.getMessage());
+		} catch(SecurityException e){
+			System.out.println(e.getMessage());
+		}
 
 	}
 
@@ -106,8 +134,30 @@ public class FileHandler {
 	 * @return True if the file exists, i.e. if the player has a saved game. False if there is a new player.
 	 */
 	public boolean startDivGame(Player player, DivGame game){
+		String fileName = "gamefiles/" + player.getName() + "_div.txt"; 
+		File file = new File(fileName);
+		Boolean exists = file.exists();
 
+		try{
+			if (exists){
+				FileReader fileReader = new FileReader(file);
+				BufferedReader bufferedReader = new BufferedReader(fileReader);
+				player.setPoints(Integer.parseInt(bufferedReader.readLine()));
+				player.setCompleted(Integer.parseInt(bufferedReader.readLine()));
+				
+				for (int x = 0; x < 13; x++){
+					for (int y = 0; y < 13; y++){
+						game.resultArr[x][y] = Integer.parseInt(bufferedReader.readLine());
+					}
+				}
+				bufferedReader.close();
+			}
+		} catch (FileNotFoundException e){
+			e.getMessage();
+		} catch (IOException e){
+			e.getMessage();
+		} 
 
-		return true;
+		return exists;
 	}
 }

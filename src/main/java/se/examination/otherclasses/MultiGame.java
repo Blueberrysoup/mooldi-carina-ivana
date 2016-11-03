@@ -5,7 +5,6 @@
 **/
 package se.examination.otherclasses;
 
-import java.util.Arrays;
 import java.util.Random;
 
 import se.examination.interfaces.GameInterface;

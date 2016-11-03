@@ -5,7 +5,6 @@
 **/
 package se.examination.otherclasses;
 
-import java.util.Arrays;
 import java.util.Random;
 
 import se.examination.interfaces.GameInterface;
@@ -68,12 +67,6 @@ public class DivGame implements GameInterface{
 			}
 		}	
 		
-/*		
- 		/TODO: Testa utskrift av matrisen när det går att titta på divisions-knappen
-		for (int i = 0; i < 13; i++){
-			System.out.println(Arrays.toString(resultArr[i]));
-		}
-*/
 }
 	
 	/**
