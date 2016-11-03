@@ -5,6 +5,7 @@
 **/
 package se.examination.otherclasses;
 
+import java.util.Arrays;
 import java.util.Random;
 
 import se.examination.interfaces.GameInterface;
@@ -28,38 +29,35 @@ public class MultiGame implements GameInterface{
 	 * and this entry is initiated to 10 since 7*12 is considered "hard".
 	 */
 	public void newMultArray(){
-		for (int y = 0; y <= 12; y++){
-			resultArr[0][y] = EASY;
-			resultArr[1][y] = EASY;
-			resultArr[2][y] = EASY;
-			resultArr[3][y] = MEDIUM;
-			resultArr[4][y] = MEDIUM;
-			resultArr[5][y] = MEDIUM;
-			resultArr[6][y] = HARD;
-			resultArr[7][y] = HARD;
-			resultArr[8][y] = HARD;
-			resultArr[9][y] = HARD;			
-			resultArr[10][y] = EASY;
-			resultArr[11][y] = MEDIUM;
-			resultArr[12][y] = HARD;
-		}
+		
+		//1. Set all entries to EASY
 		for (int x = 0; x <= 12; x++){
-			if ((x <= 2) || (x == 10)){
-				resultArr[x][0] = EASY;
-				resultArr[x][1] = EASY;
-				resultArr[x][2] = EASY;
-				resultArr[x][3] = EASY;
-				resultArr[x][4] = EASY;
-				resultArr[x][5] = EASY;
-				resultArr[x][6] = EASY;
-				resultArr[x][7] = EASY;
-				resultArr[x][8] = EASY;
-				resultArr[x][9] = EASY;			
-				resultArr[x][10] = EASY;
-				resultArr[x][11] = EASY;
-				resultArr[x][12] = EASY;
-			}			
-		}
+			for (int y = 0; y <=12; y++){
+				resultArr[x][y] = EASY;
+			}
+		}	
+		
+		//2. Set tables 3-9 and 12 to MEDIUM
+		for (int x = 0; x <= 12; x++){
+			for (int y = 0; y <= 12; y++){
+				if (((x >= 3) && (x <= 9) && (y >= 3) && (y <= 9))
+						|| ((x == 12) && (y >= 3) && (y <= 5))
+						|| ((x >= 3) && (x <= 5) && (y == 12))) {
+							resultArr[x][y] = MEDIUM;
+				}
+			}
+		}	
+
+		//3. Finally, set tables 6-9 and 12 to HARD
+		for (int x = 0; x <= 12; x++){
+			for (int y = 0; y <= 12; y++){
+				if (((((x >= 6) && (x <= 9)) || (x == 12)) && (((y >= 6) && (y <= 9)) || (y == 12)))
+						|| ((x == 11) || (x == 12)) && ((y == 11) || (y == 12))) {
+							resultArr[x][y] = HARD;
+				}
+			}
+		}	
+
 	}
 	
 	/**

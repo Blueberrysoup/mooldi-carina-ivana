@@ -5,6 +5,7 @@
 **/
 package se.examination.otherclasses;
 
+import java.util.Arrays;
 import java.util.Random;
 
 import se.examination.interfaces.GameInterface;
@@ -13,6 +14,7 @@ public class DivGame implements GameInterface{
 	
 	int[][] resultArr = new int[13][13];
 
+	final int NO_USE = 0;
 	final int EASY = 2;
 	final int MEDIUM = 5;	
 	final int HARD = 10;
@@ -21,10 +23,58 @@ public class DivGame implements GameInterface{
 	Integer currY = 0;
 	
 	/**
-	 * TODO 
+	 * Initiates the resultArr for first time users.
+	 * Each entry tells how many times a number (e.g. 56/7) has to be answered correctly in order to say that it is cleared.
+	 * Easy numbers like 30/10 must not be answered as many times as harder numbers like 63/9. Division by 0 and 1 and not used at all.
+	 * 
+	 * The indices for each entry in the array corresponds to the number to calculate, e.g. resultArr[7][6] means 42/6 since 7*6=42
+	 * This entry is initiated to 10 since 42/6 is considered "hard".
 	 */
 	public void newDivArrays(){
-	}
+		//1. Set all entries to EASY
+		for (int x = 0; x <= 12; x++){
+			for (int y = 0; y <=12; y++){
+				resultArr[x][y] = EASY;
+			}
+		}	
+		
+		//2. Set tables 0-1 to NO_USE
+		for (int x = 0; x <= 12; x++){
+			for (int y = 0; y <= 12; y++){
+				if ((x == 0) || (x == 1) || (y == 0) || (y == 1)) {
+					resultArr[x][y] = NO_USE;
+				}
+			}
+		}	
+		
+		//3. Set tables 3-9 and 12 to MEDIUM
+		for (int x = 0; x <= 12; x++){
+			for (int y = 0; y <= 12; y++){
+				if (((x >= 3) && (x <= 9) && (y >= 3) && (y <= 9))
+						|| ((x == 12) && (y >= 3) && (y <= 5))
+						|| ((x >= 3) && (x <= 5) && (y == 12))) {
+							resultArr[x][y] = MEDIUM;
+				}
+			}
+		}	
+
+		//4. Finally, set tables 6-9 and 12 to HARD
+		for (int x = 0; x <= 12; x++){
+			for (int y = 0; y <= 12; y++){
+				if (((((x >= 6) && (x <= 9)) || (x == 12)) && (((y >= 6) && (y <= 9)) || (y == 12)))
+						|| ((x == 11) || (x == 12)) && ((y == 11) || (y == 12))) {
+							resultArr[x][y] = HARD;
+				}
+			}
+		}	
+		
+/*		
+ 		/TODO: Testa utskrift av matrisen när det går att titta på divisions-knappen
+		for (int i = 0; i < 13; i++){
+			System.out.println(Arrays.toString(resultArr[i]));
+		}
+*/
+}
 	
 	/**
 	 * Presents a new number to calculate by fetching two random integers from a predefined result matrix
@@ -57,12 +107,12 @@ public class DivGame implements GameInterface{
 	 * @return True if the number is cleared, otherwise false
 	 */
 	public boolean isCleared(){
-		//returnera true om ett tal (dvs currX / currY) är "avklarat" dvs om antal återstående försök på det talet är 0
-		return false;
+		return (resultArr[currX][currY] == 0);
 	}
 
 	/**
-	 * TODO
+	 * Returns resultArr. Used in FileHandler class to save the current results in a file when the user quits the game
+	 * @return The result matrix
 	 */
 	public int[][] getResultArr(){
 		return resultArr;
