@@ -29,6 +29,7 @@ public class DivGame implements GameInterface{
 	 * The indices for each entry in the array corresponds to the number to calculate, e.g. resultArr[7][6] means 42/6 since 7*6=42
 	 * This entry is initiated to 10 since 42/6 is considered "hard".
 	 */
+
 	public void newDivArray(){
 		//1. Set all entries to EASY
 		for (int x = 0; x <= 12; x++){

@@ -22,6 +22,7 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.Timer;
 
+import se.examination.otherclasses.DivGame;
 import se.examination.otherclasses.FileHandler;
 import se.examination.otherclasses.MultiGame;
 import se.examination.otherclasses.Player;
@@ -34,9 +35,11 @@ public class MainFrame implements ActionListener{
 	private JButton btnDivision;
 	private JPanel startPage = new JPanel();
 	private JPanel multiPage = new JPanel();
+	private JPanel divPage = new JPanel();
 	private JLabel lblHejNamn;
 	private Player player = new Player();
 	private MultiGame game = new MultiGame();
+	private DivGame gameDivision= new DivGame();
 	private FileHandler fileHandler = new FileHandler();
 	private Timer timer = new Timer(10000,null);
 	private JButton btnSluta;
@@ -52,6 +55,7 @@ public class MainFrame implements ActionListener{
 	/**
 	 * Launch the application.
 	 */
+	
 	public static void main(String[] args) {
 		MainFrame window = new MainFrame();
 		window.frmMooldi.setVisible(true);
@@ -86,9 +90,14 @@ public class MainFrame implements ActionListener{
 		frmMooldi.getContentPane().add(multiPage, "name_23490729527832");
 		multiPage.setLayout(null);
 		
+		divPage.setBackground(Color.PINK);
+		frmMooldi.getContentPane().add(divPage, "name_23428416361482");
+		divPage.setLayout(null);
+		
 		//Add components to pages
 		createStartPageGUI();
-		createMultiPageGUI();	
+		createMultiPageGUI();
+		createDivPageGUI();
 		
 	}
 
@@ -188,6 +197,65 @@ public class MainFrame implements ActionListener{
 		multiPage.add(progressBar);
 		
 	}
+	
+	/**
+	 * Initialize the contents of multiplication page.
+	 */
+	public void createDivPageGUI(){
+		//Labels - text fields
+		lblHejNamn = new JLabel();
+		lblHejNamn.setForeground(Color.LIGHT_GRAY);
+		lblHejNamn.setFont(new Font("Dialog", Font.PLAIN, 55));
+		lblHejNamn.setBounds(41, 43, 633, 79);
+		divPage.add(lblHejNamn);
+		
+		JLayeredPane layeredPane = new JLayeredPane();
+		layeredPane.setBounds(0, 0, 1, 1);
+		divPage.add(layeredPane);
+		
+		labelCurrPoints = new JLabel("");
+		labelCurrPoints.setHorizontalAlignment(SwingConstants.CENTER);
+		labelCurrPoints.setBounds(279, 333, 188, 15);
+		divPage.add(labelCurrPoints);		
+
+		labelCompleted = new JLabel("");
+		labelCompleted.setBounds(70, 410, 500, 15);
+		divPage.add(labelCompleted);
+
+		lblXTalet = new JLabel();
+		lblXTalet.setHorizontalAlignment(SwingConstants.CENTER);
+		lblXTalet.setFont(new Font("Dialog", Font.BOLD, 32));
+		lblXTalet.setBounds(306, 168, 133, 79);
+		divPage.add(lblXTalet);
+		
+		textFieldSvar = new JTextField();
+		textFieldSvar.setBounds(301, 256, 138, 36);
+		divPage.add(textFieldSvar);
+		textFieldSvar.setColumns(10);
+				
+		labelResultError = new JLabel("Tyvärr var det fel svar - försök igen!");
+		labelResultError.setFont(new Font("Dialog", Font.BOLD | Font.ITALIC, 18));
+		labelResultError.setForeground(Color.RED);
+		labelResultError.setHorizontalAlignment(SwingConstants.CENTER);
+		labelResultError.setBounds(122, 304, 509, 34);
+		divPage.add(labelResultError);
+
+		//Button
+		btnSluta = new JButton("Sluta spela och spara poängen");
+		btnSluta.setBounds(419, 440, 255, 25);
+		divPage.add(btnSluta);
+		
+		btnOKnext = new JButton("OK");
+		btnOKnext.setBounds(468, 261, 117, 25);
+		divPage.add(btnOKnext);
+		
+		//Progressbar
+		progressBar = new JProgressBar();
+		progressBar.setMaximum(169);
+		progressBar.setBounds(70, 437, 148, 14);
+		divPage.add(progressBar);
+		
+	}
 
 	/**
 	 * Initialize game when user selects to run Multiplication
@@ -204,6 +272,22 @@ public class MainFrame implements ActionListener{
 		
 		startPage.setVisible(false);
 		multiPage.setVisible(true);
+		
+		runGame();
+	}
+	
+	public void onClickDivision(){
+		player.setName(textFieldName.getText());
+		
+	//	if (!fileHandler.startDivGame(player, gameDivision)) 	//if this user not already has an ongoing game			
+	//		gameDivision.newDivArrays();
+		
+		lblHejNamn.setText("Hej " + textFieldName.getText() + "!");
+		labelCurrPoints.setText("ANTAL RÄTT: " + player.getPoints());
+		labelCompleted.setText("Du har klarat av " + player.getCompleted() + " av 169 tal.");
+		
+		startPage.setVisible(false);
+		divPage.setVisible(true);
 		
 		runGame();
 	}
@@ -259,7 +343,8 @@ public class MainFrame implements ActionListener{
 	 * Action listeners
 	 */	
 	public void addActionListeners() {
-		btnMulti.addActionListener(this);		
+		btnMulti.addActionListener(this);	
+		btnDivision.addActionListener(this);
 		textFieldSvar.addActionListener(this);
 		btnSluta.addActionListener(this);
 		btnOKnext.addActionListener(this);
@@ -273,6 +358,9 @@ public class MainFrame implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == btnMulti) {
 			onClickMulti();			
+		}
+		if (e.getSource() == btnDivision) {
+			onClickDivision();			
 		}
 		if ((e.getSource() == textFieldSvar)||(e.getSource() == btnOKnext)) {
 			onAnswering();			
