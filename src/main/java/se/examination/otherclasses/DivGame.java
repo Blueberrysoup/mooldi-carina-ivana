@@ -70,14 +70,20 @@ public class DivGame implements GameInterface{
 }
 	
 	/**
-	 * Presents a new number to calculate by fetching two random integers from a predefined result matrix
+	 * Presents a new number to calculate by fetching two random integers X and Y both between 2 and 12
 	 * If the number is already cleared, it fetches a new number
+	 * The number to calculate is (X*Y) / X.
 	 * @return String The value to calculate, formatted as e.g. "64 / 8" 
 	 */
 	public String runGame(){
-		//slumpa fram divisionstal
-		//returnera som en sträng att visa i GUI:t, t.ex. 63 / 7
-		return "63 / 7";
+		do{
+			currX = rand.nextInt(13);
+			currY = rand.nextInt(13);
+		} while (resultArr[currX][currY] == 0);	
+		
+		Integer prod = currX * currY;
+		String ret = prod.toString() + " / " + currX.toString();
+		return ret;
 	}
 	
 	/**
@@ -87,11 +93,12 @@ public class DivGame implements GameInterface{
 	 * @return True if correct answer, otherwise false
 	 */	
 	public boolean checkAnswer(int answer){
-		//ta in svaret som spelaren angivit
-		//räkna ut talet currX / currY och se om det är == answer
-		//om rätt: räkna ner i resultarrayen
-		//returnera true/false beroende på om det är rätt svar
-		return true;
+		boolean result = false;
+		if ((answer == currY.intValue())){ 
+			resultArr[currX][currY]--;
+			result = true;
+		}		
+		return result;
 	}
 	
 	/**
