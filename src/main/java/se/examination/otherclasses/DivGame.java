@@ -24,6 +24,7 @@ public class DivGame implements GameInterface{
 	 * TODO 
 	 */
 	public void newDivArrays(){
+		
 	}
 	
 	/**
