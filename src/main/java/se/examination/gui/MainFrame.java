@@ -31,12 +31,14 @@ public class MainFrame implements ActionListener{
 
 	private JFrame frmMooldi;
 	private JTextField textFieldName;
+//	private JTextField textFieldNameDivision;
 	private JButton btnMulti;
 	private JButton btnDivision;
 	private JPanel startPage = new JPanel();
 	private JPanel multiPage = new JPanel();
 	private JPanel divPage = new JPanel();
 	private JLabel lblHejNamn;
+	private JLabel lblHejNamnDivision;
 	private Player player = new Player();
 	private MultiGame game = new MultiGame();
 	private DivGame gameDivision= new DivGame();
@@ -50,7 +52,16 @@ public class MainFrame implements ActionListener{
 	private JButton btnOKnext;
 	private JLabel labelResultError;
 	private JProgressBar progressBar;
-	
+	private JButton btnSlutaDivision;
+	private JLabel lblXTaletDivision;
+	private JTextField textFieldSvarDivision;
+	private JLabel labelCurrPointsDivision;
+	private JLabel labelCompletedDivision;
+	private JButton btnOKnextDivision;
+	private JLabel labelResultErrorDivision;
+	private JProgressBar progressBarDivision;
+
+
 
 	/**
 	 * Launch the application.
@@ -66,6 +77,7 @@ public class MainFrame implements ActionListener{
 	 * Create the application.
 	 */
 	public MainFrame() {
+		System.out.println("mainFrame constructor entered");
 		createGUI();
 		addActionListeners();
 	}
@@ -203,57 +215,57 @@ public class MainFrame implements ActionListener{
 	 */
 	public void createDivPageGUI(){
 		//Labels - text fields
-		lblHejNamn = new JLabel();
-		lblHejNamn.setForeground(Color.LIGHT_GRAY);
-		lblHejNamn.setFont(new Font("Dialog", Font.PLAIN, 55));
-		lblHejNamn.setBounds(41, 43, 633, 79);
-		divPage.add(lblHejNamn);
+		lblHejNamnDivision = new JLabel();
+		lblHejNamnDivision.setForeground(Color.LIGHT_GRAY);
+		lblHejNamnDivision.setFont(new Font("Dialog", Font.PLAIN, 55));
+		lblHejNamnDivision.setBounds(41, 43, 633, 79);
+		divPage.add(lblHejNamnDivision);
 		
-		JLayeredPane layeredPane = new JLayeredPane();
-		layeredPane.setBounds(0, 0, 1, 1);
-		divPage.add(layeredPane);
+		JLayeredPane layeredPaneDivision = new JLayeredPane();
+		layeredPaneDivision.setBounds(0, 0, 1, 1);
+		divPage.add(layeredPaneDivision);
 		
-		labelCurrPoints = new JLabel("");
-		labelCurrPoints.setHorizontalAlignment(SwingConstants.CENTER);
-		labelCurrPoints.setBounds(279, 333, 188, 15);
-		divPage.add(labelCurrPoints);		
+		labelCurrPointsDivision = new JLabel("");
+		labelCurrPointsDivision.setHorizontalAlignment(SwingConstants.CENTER);
+		labelCurrPointsDivision.setBounds(279, 333, 188, 15);
+		divPage.add(labelCurrPointsDivision);		
 
-		labelCompleted = new JLabel("");
-		labelCompleted.setBounds(70, 410, 500, 15);
-		divPage.add(labelCompleted);
+		labelCompletedDivision = new JLabel("");
+		labelCompletedDivision.setBounds(70, 410, 500, 15);
+		divPage.add(labelCompletedDivision);
 
-		lblXTalet = new JLabel();
-		lblXTalet.setHorizontalAlignment(SwingConstants.CENTER);
-		lblXTalet.setFont(new Font("Dialog", Font.BOLD, 32));
-		lblXTalet.setBounds(306, 168, 133, 79);
-		divPage.add(lblXTalet);
+		lblXTaletDivision = new JLabel();
+		lblXTaletDivision.setHorizontalAlignment(SwingConstants.CENTER);
+		lblXTaletDivision.setFont(new Font("Dialog", Font.BOLD, 32));
+		lblXTaletDivision.setBounds(306, 168, 133, 79);
+		divPage.add(lblXTaletDivision);
 		
-		textFieldSvar = new JTextField();
-		textFieldSvar.setBounds(301, 256, 138, 36);
-		divPage.add(textFieldSvar);
-		textFieldSvar.setColumns(10);
+		textFieldSvarDivision = new JTextField();
+		textFieldSvarDivision.setBounds(301, 256, 138, 36);
+		divPage.add(textFieldSvarDivision);
+		textFieldSvarDivision.setColumns(10);
 				
-		labelResultError = new JLabel("Tyvärr var det fel svar - försök igen!");
-		labelResultError.setFont(new Font("Dialog", Font.BOLD | Font.ITALIC, 18));
-		labelResultError.setForeground(Color.RED);
-		labelResultError.setHorizontalAlignment(SwingConstants.CENTER);
-		labelResultError.setBounds(122, 304, 509, 34);
-		divPage.add(labelResultError);
+		labelResultErrorDivision = new JLabel("Tyvärr var det fel svar - försök igen!");
+		labelResultErrorDivision.setFont(new Font("Dialog", Font.BOLD | Font.ITALIC, 18));
+		labelResultErrorDivision.setForeground(Color.RED);
+		labelResultErrorDivision.setHorizontalAlignment(SwingConstants.CENTER);
+		labelResultErrorDivision.setBounds(122, 304, 509, 34);
+		divPage.add(labelResultErrorDivision);
 
 		//Button
-		btnSluta = new JButton("Sluta spela och spara poängen");
-		btnSluta.setBounds(419, 440, 255, 25);
-		divPage.add(btnSluta);
+		btnSlutaDivision = new JButton("Sluta spela och spara poängen");
+		btnSlutaDivision.setBounds(419, 440, 255, 25);
+		divPage.add(btnSlutaDivision);
 		
-		btnOKnext = new JButton("OK");
-		btnOKnext.setBounds(468, 261, 117, 25);
-		divPage.add(btnOKnext);
+		btnOKnextDivision = new JButton("OK");
+		btnOKnextDivision.setBounds(468, 261, 117, 25);
+		divPage.add(btnOKnextDivision);
 		
 		//Progressbar
-		progressBar = new JProgressBar();
-		progressBar.setMaximum(169);
-		progressBar.setBounds(70, 437, 148, 14);
-		divPage.add(progressBar);
+		progressBarDivision = new JProgressBar();
+		progressBarDivision.setMaximum(169);
+		progressBarDivision.setBounds(70, 437, 148, 14);
+		divPage.add(progressBarDivision);
 		
 	}
 
@@ -279,17 +291,17 @@ public class MainFrame implements ActionListener{
 	public void onClickDivision(){
 		player.setName(textFieldName.getText());
 		
-	//	if (!fileHandler.startDivGame(player, gameDivision)) 	//if this user not already has an ongoing game			
-	//		gameDivision.newDivArrays();
+		if (!fileHandler.startDivGame(player, gameDivision)) 	//if this user not already has an ongoing game			
+			gameDivision.newDivArray();
 		
-		lblHejNamn.setText("Hej " + textFieldName.getText() + "!");
-		labelCurrPoints.setText("ANTAL RÄTT: " + player.getPoints());
-		labelCompleted.setText("Du har klarat av " + player.getCompleted() + " av 169 tal.");
+		lblHejNamnDivision.setText("Hej " + textFieldName.getText() + "!");
+		labelCurrPointsDivision.setText("ANTAL RÄTT: " + player.getPoints());
+		labelCompletedDivision.setText("Du har klarat av " + player.getCompleted() + " av 169 tal.");
 		
 		startPage.setVisible(false);
 		divPage.setVisible(true);
 		
-		runGame();
+		runDivGame();
 	}
 
 
@@ -301,6 +313,17 @@ public class MainFrame implements ActionListener{
 		progressBar.setValue(player.getCompleted());
 		textFieldSvar.setText("");
 		lblXTalet.setText(game.runGame());
+		if (!timer.isRunning())
+			timer.start();
+		else
+			timer.restart(); 
+	}
+	
+	public void runDivGame(){
+		labelResultErrorDivision.setVisible(false);
+		progressBarDivision.setValue(player.getCompleted());
+		textFieldSvarDivision.setText("");
+		lblXTaletDivision.setText(gameDivision.runGame());
 		if (!timer.isRunning())
 			timer.start();
 		else
@@ -330,12 +353,37 @@ public class MainFrame implements ActionListener{
 		}
 	}
 
+	public void onAnsweringDiv(){
+		try{
+			if (gameDivision.checkAnswer(Integer.parseInt(textFieldSvarDivision.getText())) == true){
+					player.increasePoints();
+					if (gameDivision.isCleared()){
+						player.increaseCompleted();
+						labelCompletedDivision.setText("Du har klarat av " + player.getCompleted() + " av 169 tal.");
+						progressBarDivision.setValue(player.getCompleted());
+					}
+					labelCurrPointsDivision.setText("ANTAL RÄTT: " + player.getPoints());	
+					runDivGame();
+			} else {
+				textFieldSvarDivision.setText("");
+				labelResultErrorDivision.setVisible(true);
+			}
+		} catch (NumberFormatException e){
+			e.getMessage();
+		}
+	}
+
+	
 
 	/**
 	 * Save game - when user presses Save-button
 	 */
 	public void saveGame(){
-		fileHandler.saveMultiGameToFile(player, game); 	//TODO:Nu sparar den här bara Multiplikation, lägg till att den kan anropa saveDivGameToFile(player, game) också
+		if (game.isCleared()){
+		fileHandler.saveMultiGameToFile(player, game); 	
+		}else{
+		fileHandler.saveDivGameToFile(player, gameDivision);	
+		}
 		System.exit(0);
 	}
 
@@ -348,6 +396,9 @@ public class MainFrame implements ActionListener{
 		textFieldSvar.addActionListener(this);
 		btnSluta.addActionListener(this);
 		btnOKnext.addActionListener(this);
+		textFieldSvarDivision.addActionListener(this);
+		btnSlutaDivision.addActionListener(this);
+		btnOKnextDivision.addActionListener(this);
 		timer.addActionListener(this);
 	}
 
@@ -365,9 +416,13 @@ public class MainFrame implements ActionListener{
 		if ((e.getSource() == textFieldSvar)||(e.getSource() == btnOKnext)) {
 			onAnswering();			
 		}
-		if (e.getSource() == btnSluta) {
+		if ((e.getSource() == textFieldSvarDivision)||(e.getSource() == btnOKnextDivision)) {
+			onAnsweringDiv();			
+		}
+		if ((e.getSource() == btnSluta) || (e.getSource() == btnSlutaDivision)) {
 			saveGame();			
 		}
+		//TODO lägga till runDivGame
 		if (e.getSource() == timer){
 			runGame();
 		}
