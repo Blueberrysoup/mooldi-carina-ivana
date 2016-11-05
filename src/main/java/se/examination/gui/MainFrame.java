@@ -44,6 +44,7 @@ public class MainFrame implements ActionListener{
 	private DivGame gameDivision= new DivGame();
 	private FileHandler fileHandler = new FileHandler();
 	private Timer timer = new Timer(10000,null);
+	private Timer timerDiv = new Timer(15000,null);
 	private JButton btnSluta;
 	private JLabel lblXTalet;
 	private JTextField textFieldSvar;
@@ -237,7 +238,7 @@ public class MainFrame implements ActionListener{
 		lblXTaletDivision = new JLabel();
 		lblXTaletDivision.setHorizontalAlignment(SwingConstants.CENTER);
 		lblXTaletDivision.setFont(new Font("Dialog", Font.BOLD, 32));
-		lblXTaletDivision.setBounds(306, 168, 133, 79);
+		lblXTaletDivision.setBounds(306, 168, 234, 79);
 		divPage.add(lblXTaletDivision);
 		
 		textFieldSvarDivision = new JTextField();
@@ -324,10 +325,10 @@ public class MainFrame implements ActionListener{
 		progressBarDivision.setValue(player.getCompleted());
 		textFieldSvarDivision.setText("");
 		lblXTaletDivision.setText(gameDivision.runGame());
-		if (!timer.isRunning())
-			timer.start();
+		if (!timerDiv.isRunning())
+			timerDiv.start();
 		else
-			timer.restart(); 
+			timerDiv.restart(); 
 	}
 	
 	/**
@@ -379,11 +380,13 @@ public class MainFrame implements ActionListener{
 	 * Save game - when user presses Save-button
 	 */
 	public void saveGame(){
-		if (game.isCleared()){
-		fileHandler.saveMultiGameToFile(player, game); 	
-		}else{
-		fileHandler.saveDivGameToFile(player, gameDivision);	
-		}
+		
+		fileHandler.saveMultiGameToFile(player, game);	
+		System.exit(0);
+	}
+	
+	public void saveDivGame(){
+		fileHandler.saveDivGameToFile(player, gameDivision);
 		System.exit(0);
 	}
 
@@ -400,6 +403,7 @@ public class MainFrame implements ActionListener{
 		btnSlutaDivision.addActionListener(this);
 		btnOKnextDivision.addActionListener(this);
 		timer.addActionListener(this);
+		timerDiv.addActionListener(this);
 	}
 
 	/**
@@ -419,12 +423,21 @@ public class MainFrame implements ActionListener{
 		if ((e.getSource() == textFieldSvarDivision)||(e.getSource() == btnOKnextDivision)) {
 			onAnsweringDiv();			
 		}
-		if ((e.getSource() == btnSluta) || (e.getSource() == btnSlutaDivision)) {
+		if (e.getSource() == btnSluta)  {
 			saveGame();			
 		}
-		//TODO lägga till runDivGame
+		
+		if (e.getSource() == btnSlutaDivision) {
+			saveDivGame();
+		}
+		
 		if (e.getSource() == timer){
 			runGame();
 		}
+		
+		if (e.getSource() == timerDiv){
+			runDivGame();
+		}
+		
 	}
 }
