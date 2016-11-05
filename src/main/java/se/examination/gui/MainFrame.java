@@ -103,7 +103,7 @@ public class MainFrame implements ActionListener{
 		multiPage.setLayout(null);
 		
 		divPage.setBackground(Color.PINK);
-		frmMooldi.getContentPane().add(divPage, "name_23428416361482");
+		frmMooldi.getContentPane().add(divPage, "name_271421026775");
 		divPage.setLayout(null);
 		
 		//Add components to pages
@@ -185,6 +185,7 @@ public class MainFrame implements ActionListener{
 		textFieldSvar.setBounds(301, 256, 138, 36);
 		multiPage.add(textFieldSvar);
 		textFieldSvar.setColumns(10);
+		textFieldSvar.requestFocusInWindow();
 				
 		labelResultError = new JLabel("Tyvärr var det fel svar - försök igen!");
 		labelResultError.setFont(new Font("Dialog", Font.BOLD | Font.ITALIC, 18));
@@ -216,7 +217,7 @@ public class MainFrame implements ActionListener{
 	public void createDivPageGUI(){
 		//Labels - text fields
 		lblHejNamnDivision = new JLabel();
-		lblHejNamnDivision.setForeground(Color.LIGHT_GRAY);
+		lblHejNamnDivision.setForeground(Color.DARK_GRAY);
 		lblHejNamnDivision.setFont(new Font("Dialog", Font.PLAIN, 55));
 		lblHejNamnDivision.setBounds(41, 43, 633, 79);
 		divPage.add(lblHejNamnDivision);
@@ -235,7 +236,7 @@ public class MainFrame implements ActionListener{
 		divPage.add(labelCompletedDivision);
 
 		lblXTaletDivision = new JLabel();
-		lblXTaletDivision.setHorizontalAlignment(SwingConstants.CENTER);
+		lblXTaletDivision.setHorizontalAlignment(SwingConstants.LEFT);
 		lblXTaletDivision.setFont(new Font("Dialog", Font.BOLD, 32));
 		lblXTaletDivision.setBounds(306, 168, 234, 79);
 		divPage.add(lblXTaletDivision);
@@ -244,6 +245,7 @@ public class MainFrame implements ActionListener{
 		textFieldSvarDivision.setBounds(301, 256, 138, 36);
 		divPage.add(textFieldSvarDivision);
 		textFieldSvarDivision.setColumns(10);
+		textFieldSvarDivision.requestFocusInWindow();
 				
 		labelResultErrorDivision = new JLabel("Tyvärr var det fel svar - försök igen!");
 		labelResultErrorDivision.setFont(new Font("Dialog", Font.BOLD | Font.ITALIC, 18));
