@@ -7,7 +7,6 @@ package se.examination.otherclasses;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -24,7 +23,7 @@ public class FileHandler {
 	public void saveMultiGameToFile(Player player, MultiGame game){
 		int points = player.getPoints();
 		int completed = player.getCompleted();
-		int[][] resultArr = game.getResultArr();
+		int[][] resArr = game.getResultArr();
 		String fileName = "gamefiles/" + player.getName() + "_multi.txt";
 		File file = new File(fileName);
 		try{
@@ -34,11 +33,11 @@ public class FileHandler {
 			FileWriter writer = new FileWriter(file);
 			
 			writer.write(points+"\n");
-						writer.write(completed+"\n");
+			writer.write(completed+"\n");
 			
 			for (int x = 0; x < 13; x++){
 				for (int y = 0; y < 13; y++){
-					writer.write(resultArr[x][y]+"\n");
+					writer.write(resArr[x][y]+"\n");
 				}
 			}
 			
@@ -62,7 +61,7 @@ public class FileHandler {
 	public void saveDivGameToFile(Player player, DivGame game){
 		int points = player.getPoints();
 		int completed = player.getCompleted();
-		int[][] resultArr = game.getResultArr();
+		int[][] resArr = game.getResultArr();
 		String fileName = "gamefiles/" + player.getName() + "_div.txt";
 		File file = new File(fileName);
 		try{
@@ -72,11 +71,11 @@ public class FileHandler {
 			FileWriter writer = new FileWriter(file);
 			
 			writer.write(points+"\n");
-						writer.write(completed+"\n");
+			writer.write(completed+"\n");
 			
 			for (int x = 0; x < 13; x++){
 				for (int y = 0; y < 13; y++){
-					writer.write(resultArr[x][y]+"\n");
+					writer.write(resArr[x][y]+"\n");
 				}
 			}
 			
@@ -102,6 +101,7 @@ public class FileHandler {
 		String fileName = "gamefiles/" + player.getName() + "_multi.txt"; 
 		File file = new File(fileName);
 		Boolean exists = file.exists();
+		int[][] resArr = game.getResultArr();
 
 		try{
 			if (exists){
@@ -112,15 +112,13 @@ public class FileHandler {
 				
 				for (int x = 0; x < 13; x++){
 					for (int y = 0; y < 13; y++){
-						game.resultArr[x][y] = Integer.parseInt(bufferedReader.readLine());
+						resArr[x][y] = Integer.parseInt(bufferedReader.readLine());
 					}
 				}
 				bufferedReader.close();
 			}
-		} catch (FileNotFoundException e){
-			e.getMessage();
 		} catch (IOException e){
-			e.getMessage();
+			System.out.println(e.getMessage());
 		} 
 
 		return exists;
@@ -137,6 +135,7 @@ public class FileHandler {
 		String fileName = "gamefiles/" + player.getName() + "_div.txt"; 
 		File file = new File(fileName);
 		Boolean exists = file.exists();
+		int[][] resArr = game.getResultArr();
 
 		try{
 			if (exists){
@@ -147,15 +146,13 @@ public class FileHandler {
 				
 				for (int x = 0; x < 13; x++){
 					for (int y = 0; y < 13; y++){
-						game.resultArr[x][y] = Integer.parseInt(bufferedReader.readLine());
+						resArr[x][y] = Integer.parseInt(bufferedReader.readLine());
 					}
 				}
 				bufferedReader.close();
 			}
-		} catch (FileNotFoundException e){
-			e.getMessage();
 		} catch (IOException e){
-			e.getMessage();
+			System.out.println(e.getMessage());
 		} 
 
 		return exists;
