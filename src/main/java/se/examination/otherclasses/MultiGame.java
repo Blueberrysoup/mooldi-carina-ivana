@@ -89,6 +89,7 @@ public class MultiGame implements GameInterface{
 	 */
 	public String runGame(){
 		Random rand = new Random();
+		String ret = "";
 		int count = 0;
 		do{
 			currX = rand.nextInt(13);
@@ -96,7 +97,11 @@ public class MultiGame implements GameInterface{
 			count++;
 		} while ((resultArr[currX][currY] == 0) && (count <= 169));	
 		
-		String	ret = currX.toString() + " * " + currY.toString();
+		if (count <= 169)
+			ret = currX.toString() + " * " + currY.toString();
+		else
+			ret = "GAME OVER!";
+
 		return ret;
 	}
 	

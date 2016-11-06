@@ -100,6 +100,7 @@ public class DivGame implements GameInterface{
 	 */
 	public String runGame(){
 		Random rand = new Random();
+		String ret = "";
 		int count = 0;
 		do{
 			currX = rand.nextInt(13);
@@ -108,7 +109,12 @@ public class DivGame implements GameInterface{
 		} while ((resultArr[currX][currY] == 0) && (count <= 169));	
 		
 		Integer prod = currX * currY;
-		String ret = prod.toString() + " / " + currX.toString();
+		
+		if (count <= 169)
+			ret = prod.toString() + " / " + currX.toString();
+		else
+			ret = "GAME OVER!";
+		
 		return ret;
 	}
 	
