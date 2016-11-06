@@ -279,10 +279,7 @@ public class MainFrame implements ActionListener{
 		startPage.setVisible(false);
 		multiPage.setVisible(true);
 
-		if (player.getPoints() < MAX_MULTI)		
-			runGame("Multi");
-		//else
-			//TODO: GAME OVER!
+		runGame("Multi");
 	}
 	
 	/**
@@ -302,10 +299,7 @@ public class MainFrame implements ActionListener{
 		startPage.setVisible(false);
 		divPage.setVisible(true);
 		
-		if (player.getPoints() < MAX_DIV)		
-			runGame("Div");
-		//else
-			//TODO: GAME OVER!
+		runGame("Div");
 	}
 
 
@@ -315,24 +309,34 @@ public class MainFrame implements ActionListener{
 	 */
 	public void runGame(String type){
 		if (type == "Multi"){
-			lblResultError.setVisible(false);
-			progressBar.setValue(player.getPoints());
-			textFieldSvar.setText("");
-			lblXTalet.setText(game.runGame());
-			if (!timer.isRunning())
-				timer.start();
-			else
-				timer.restart(); 
+			if ((player.getPoints() < MAX_MULTI) && (player.getCompleted() < 169)){
+				lblResultError.setVisible(false);
+				progressBar.setValue(player.getPoints());
+				textFieldSvar.setText("");
+				lblXTalet.setText(game.runGame());
+				if (!timer.isRunning())
+					timer.start();
+				else
+					timer.restart(); 
+			}
+			else {
+				//TODO: GAME OVER!
+			}
 		}
 		else if (type == "Div"){
-			lblResultErrorDivision.setVisible(false);
-			progressBarDivision.setValue(player.getPoints());
-			textFieldSvarDivision.setText("");
-			lblXTaletDivision.setText(gameDivision.runGame());
-			if (!timerDiv.isRunning())
-				timerDiv.start();
-			else
-				timerDiv.restart(); 
+			if ((player.getPoints() < MAX_DIV) && (player.getCompleted() < 169)){
+				lblResultErrorDivision.setVisible(false);
+				progressBarDivision.setValue(player.getPoints());
+				textFieldSvarDivision.setText("");
+				lblXTaletDivision.setText(gameDivision.runGame());
+				if (!timerDiv.isRunning())
+					timerDiv.start();
+				else
+					timerDiv.restart(); 
+			}
+			else {
+				//TODO: GAME OVER!
+			}
 		}
 	}
 		
@@ -346,16 +350,13 @@ public class MainFrame implements ActionListener{
 		try{
 			if (type == "Multi"){
 				if (game.checkAnswer(Integer.parseInt(textFieldSvar.getText())) == true){
-						player.increasePoints();
-						if (game.isCleared()){
-							player.increaseCompleted();
-						}	
-						lblCompleted.setText("Du har klarat av totalt " + player.getPoints() + " av " + MAX_MULTI + " tal.");
-						progressBar.setValue(player.getPoints());
-						if (player.getPoints() < MAX_MULTI)
-							runGame("Multi");
-						//else
-							//TODO: GAME OVER!
+					player.increasePoints();
+					if (game.isCleared()){
+						player.increaseCompleted();
+					}	
+					lblCompleted.setText("Du har klarat av totalt " + player.getPoints() + " av " + MAX_MULTI + " tal.");
+					progressBar.setValue(player.getPoints());
+					runGame("Multi");
 				} else {
 					textFieldSvar.setText("");
 					lblResultError.setVisible(true);
@@ -370,10 +371,7 @@ public class MainFrame implements ActionListener{
 					lblCompletedDivision.setText("Du har klarat av totalt " + player.getPoints() + " av " + MAX_DIV + " tal.");
 					progressBarDivision.setValue(player.getPoints());
 					
-					if (player.getPoints() < MAX_DIV)
-						runGame("Div");
-					//else
-						//TODO: GAME OVER!
+					runGame("Div");
 				} else {
 					textFieldSvarDivision.setText("");
 					lblResultErrorDivision.setVisible(true);

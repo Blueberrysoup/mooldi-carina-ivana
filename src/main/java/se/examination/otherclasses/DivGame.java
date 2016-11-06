@@ -95,26 +95,19 @@ public class DivGame implements GameInterface{
 	 * Presents a new number to calculate by fetching two random integers X and Y both between 2 and 12
 	 * If the number is already cleared, it fetches a new number
 	 * The number to calculate is (X*Y) / X.
-	 * To prevent an infinite loop if all entries are 0 - try max 169 times (i.e. the number of entries in the matrix)
+	 * This method is only called if player has not yet cleared all numbers so we should be sure that not all entries are zero
 	 * @return String The value to calculate, formatted as e.g. "64 / 8" 
 	 */
 	public String runGame(){
 		Random rand = new Random();
-		String ret = "";
-		int count = 0;
 		do{
 			currX = rand.nextInt(13);
 			currY = rand.nextInt(13);
-			count++;
-		} while ((resultArr[currX][currY] == 0) && (count <= 169));	
+		} while (resultArr[currX][currY] == 0);	
 		
 		Integer prod = currX * currY;
 		
-		if (count <= 169)
-			ret = prod.toString() + " / " + currX.toString();
-		else
-			ret = "GAME OVER!";
-		
+		String ret = prod.toString() + " / " + currX.toString();		
 		return ret;
 	}
 	

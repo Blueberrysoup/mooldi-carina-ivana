@@ -84,24 +84,17 @@ public class MultiGame implements GameInterface{
 	/**
 	 * Presents a new number to calculate by fetching two random integers from the result matrix
 	 * If the number is already cleared, it fetches a new number. 
-	 * To prevent an infinite loop if all entries are 0 - try max 169 times (i.e. the number of entries in the matrix)
+	 * This method is only called if player has not yet cleared all numbers so we should be sure that not all entries are zero
 	 * @return String The value to calculate, formatted as e.g. "4 * 11" 
 	 */
 	public String runGame(){
 		Random rand = new Random();
-		String ret = "";
-		int count = 0;
 		do{
 			currX = rand.nextInt(13);
 			currY = rand.nextInt(13);
-			count++;
-		} while ((resultArr[currX][currY] == 0) && (count <= 169));	
+		} while (resultArr[currX][currY] == 0);	
 		
-		if (count <= 169)
-			ret = currX.toString() + " * " + currY.toString();
-		else
-			ret = "GAME OVER!";
-
+		String ret = currX.toString() + " * " + currY.toString();
 		return ret;
 	}
 	
