@@ -55,6 +55,7 @@ public class DivGameTest {
 	public void testRunGame() {
 		String actual = divGame.runGame();
 		String expected = Integer.toString(divGame.getCurrX()*divGame.getCurrY()) + " / " + Integer.toString(divGame.getCurrX());
+		LOG.info("Testing the runGame method with currX = " + divGame.getCurrX() + ", currY = " + divGame.getCurrY() + " and actual = " + actual);
 		assertEquals(expected, actual);
 	}
 	
@@ -109,9 +110,14 @@ public class DivGameTest {
 	@Test
 	public void testIsCleared_true() {
 		divGame.newDivArray();
+		int x = 0;
+		int y = 0;
 		for (int i = 0; i < 10; i++){
-			divGame.setCurrX(rand.nextInt(2));
-			divGame.setCurrY(rand.nextInt(2));
+			x = rand.nextInt(2); // 0 or 1
+			y = rand.nextInt(2);			
+			divGame.setCurrX(x);
+			divGame.setCurrY(y);
+			LOG.info("Testing the isCleared method with currX = " + x + " and currY = " + y);
 			assertTrue(divGame.isCleared());
 		}		
 	}
@@ -122,11 +128,12 @@ public class DivGameTest {
 		int x = 0;
 		int y = 0;
 		for (int i = 0; i < 10; i++){
-			x = rand.nextInt(13);
-			y = rand.nextInt(13);
+			x = rand.nextInt(11) + 2; //between 2 and 12
+			y = rand.nextInt(11) + 2;
 			divGame.setCurrX(x);
 			divGame.setCurrY(y);
 			LOG.info("Testing the isCleared method with currX = " + x + " and currY = " + y);
+			assertFalse(divGame.isCleared());
 		}
 	}
 }

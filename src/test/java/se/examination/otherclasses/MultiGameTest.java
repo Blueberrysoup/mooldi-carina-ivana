@@ -49,6 +49,7 @@ public class MultiGameTest {
 	public void testRunGame() {
 		String actual = multiGame.runGame();
 		String expected = Integer.toString(multiGame.getCurrX()) + " * " + Integer.toString(multiGame.getCurrY());
+		LOG.info("Testing the runGame method with currX = " + multiGame.getCurrX() + ", currY = " + multiGame.getCurrY() + " and actual = " + actual);
 		assertEquals(expected, actual);
 	}
 	
