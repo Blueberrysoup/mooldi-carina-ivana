@@ -119,7 +119,7 @@ public class MainFrame implements ActionListener{
 	}
 
 	/**
-	 * Initialize the contents of start page
+	 * Initialize the contents of start page.
 	 */
 	public void createStartPageGUI(){
 		//Labels and text fields
@@ -172,7 +172,7 @@ public class MainFrame implements ActionListener{
 		
 		lblCurrPoints = new JLabel("");
 		lblCurrPoints.setHorizontalAlignment(SwingConstants.CENTER);
-		lblCurrPoints.setBounds(279, 333, 188, 15);
+		lblCurrPoints.setBounds(229, 330, 288, 15);
 		multiPage.add(lblCurrPoints);		
 
 		lblCompleted = new JLabel("");
@@ -195,7 +195,7 @@ public class MainFrame implements ActionListener{
 		lblResultError.setFont(new Font("Dialog", Font.BOLD | Font.ITALIC, 18));
 		lblResultError.setForeground(Color.RED);
 		lblResultError.setHorizontalAlignment(SwingConstants.CENTER);
-		lblResultError.setBounds(122, 304, 509, 34);
+		lblResultError.setBounds(122, 295, 509, 34);
 		multiPage.add(lblResultError);
 
 		//Buttons
@@ -210,7 +210,7 @@ public class MainFrame implements ActionListener{
 		//Progressbar
 		progressBar = new JProgressBar();
 		progressBar.setMaximum(MAX_MULTI);				
-		progressBar.setBounds(70, 437, 148, 14);
+		progressBar.setBounds(70, 437, 200, 14);
 		multiPage.add(progressBar);	
 	}
 	
@@ -231,7 +231,7 @@ public class MainFrame implements ActionListener{
 		
 		lblCurrPointsDivision = new JLabel("");
 		lblCurrPointsDivision.setHorizontalAlignment(SwingConstants.CENTER);
-		lblCurrPointsDivision.setBounds(279, 333, 188, 15);
+		lblCurrPointsDivision.setBounds(229, 330, 288, 15);
 		divPage.add(lblCurrPointsDivision);		
 
 		lblCompletedDivision = new JLabel("");
@@ -254,7 +254,7 @@ public class MainFrame implements ActionListener{
 		lblResultErrorDivision.setFont(new Font("Dialog", Font.BOLD | Font.ITALIC, 18));
 		lblResultErrorDivision.setForeground(Color.RED);
 		lblResultErrorDivision.setHorizontalAlignment(SwingConstants.CENTER);
-		lblResultErrorDivision.setBounds(122, 304, 509, 34);
+		lblResultErrorDivision.setBounds(122, 295, 509, 34);
 		divPage.add(lblResultErrorDivision);
 
 		//Buttons
@@ -269,14 +269,14 @@ public class MainFrame implements ActionListener{
 		//Progressbar
 		progressBarDivision = new JProgressBar();
 		progressBarDivision.setMaximum(MAX_DIV);
-		progressBarDivision.setBounds(70, 437, 148, 14);
+		progressBarDivision.setBounds(70, 437, 200, 14);
 		divPage.add(progressBarDivision);
 		
 	}
 
 	/**
 	 * Initiate game when user selects to play Multiplication. 
-	 * Opens saved file if the user has played before, otherwise create a new game structure. 
+	 * Open saved file if the user has played before, otherwise create a new game structure. 
 	 * Show multiplication page with data from the saved file (if it exists).
 	 */
 	public void onClickMulti(){
@@ -286,8 +286,8 @@ public class MainFrame implements ActionListener{
 			game.newMultArray();
 		
 		lblHejNamn.setText("Hej " + textFieldName.getText() + "!");
-		lblCurrPoints.setText("ANTAL RÄTT: " + player.getPoints());
-		lblCompleted.setText("Du har klarat av " + player.getPoints() + " av " + MAX_MULTI + " tal.");
+		lblCurrPoints.setText("ANTAL RÄTT DENNA OMGÅNG: " + player.getPoints());
+		lblCompleted.setText("Du har klarat av totalt " + player.getPoints() + " av " + MAX_MULTI + " tal.");
 		
 		startPage.setVisible(false);
 		multiPage.setVisible(true);
@@ -296,7 +296,9 @@ public class MainFrame implements ActionListener{
 	}
 	
 	/**
-	 * Initialize game when user selects to run Division
+	 * Initiate game when user selects to play Division. 
+	 * Open saved file if the user has played before, otherwise create a new game structure. 
+	 * Show division page with data from the saved file (if it exists).
 	 */
 	public void onClickDivision(){
 		player.setName(textFieldName.getText());
@@ -305,8 +307,8 @@ public class MainFrame implements ActionListener{
 			gameDivision.newDivArray();
 		
 		lblHejNamnDivision.setText("Hej " + textFieldName.getText() + "!");
-		lblCurrPointsDivision.setText("ANTAL RÄTT: " + player.getPoints());
-		lblCompletedDivision.setText("Du har klarat av " + player.getPoints() + " av " + MAX_DIV + " tal.");
+		lblCurrPointsDivision.setText("ANTAL RÄTT DENNA OMGÅNG: " + player.getPoints());
+		lblCompletedDivision.setText("Du har klarat av totalt " + player.getPoints() + " av " + MAX_DIV + " tal.");
 		
 		startPage.setVisible(false);
 		divPage.setVisible(true);
@@ -316,7 +318,8 @@ public class MainFrame implements ActionListener{
 
 
 	/**
-	 * Fetch new numbers to calculate
+	 * Initiate a new game round by cleaning up the page, get a new random number to calculate and start the timer. 
+	 * @param type Either "Multi" or "Div"
 	 */
 	public void runGame(String type){
 		if (type == "Multi"){
@@ -343,6 +346,9 @@ public class MainFrame implements ActionListener{
 		
 	/**
 	 * Check if answer is correct when user enters an answer and either press Enter or OK-button. 
+	 * If correct: update progressbar and run a new game round.
+	 * If wrong: show error message.
+	 * @param type Either "Multi" or "Div"
 	 */
 	public void onAnswering(String type){
 		try{
@@ -352,9 +358,9 @@ public class MainFrame implements ActionListener{
 						if (game.isCleared()){
 							player.increaseCompleted();
 						}	
-						lblCompleted.setText("Du har klarat av " + player.getPoints() + " av " + MAX_MULTI + " tal.");
+						lblCompleted.setText("Du har klarat av totalt " + player.getPoints() + " av " + MAX_MULTI + " tal.");
 						progressBar.setValue(player.getPoints());
-						lblCurrPoints.setText("ANTAL RÄTT: " + player.getPoints());	
+						lblCurrPoints.setText("ANTAL RÄTT DENNA OMGÅNG: " + player.getPoints());	
 						runGame("Multi");
 				} else {
 					textFieldSvar.setText("");
@@ -367,10 +373,10 @@ public class MainFrame implements ActionListener{
 					if (gameDivision.isCleared()){
 						player.increaseCompleted();
 					}
-					lblCompletedDivision.setText("Du har klarat av " + player.getPoints() + " av " + MAX_DIV + " tal.");
+					lblCompletedDivision.setText("Du har klarat av totalt " + player.getPoints() + " av " + MAX_DIV + " tal.");
 					progressBarDivision.setValue(player.getPoints());
 					
-					lblCurrPointsDivision.setText("ANTAL RÄTT: " + player.getPoints());	
+					lblCurrPointsDivision.setText("ANTAL RÄTT DENNA OMGÅNG: " + player.getPoints());	
 					runGame("Div");
 				} else {
 					textFieldSvarDivision.setText("");
@@ -384,7 +390,8 @@ public class MainFrame implements ActionListener{
 	
 
 	/**
-	 * Save game - when user presses Save-button
+	 * Save game - when user press Save-button
+	 * @param type Either "Multi" or "Div"
 	 */
 	public void saveGame(String type){
 		if (type == "Multi"){

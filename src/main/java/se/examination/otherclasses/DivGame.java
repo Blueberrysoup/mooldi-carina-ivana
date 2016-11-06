@@ -16,7 +16,6 @@ public class DivGame implements GameInterface{
 	private final int EASY = 2;
 	private final int MEDIUM = 5;	
 	private final int HARD = 10;
-	private Random rand = new Random();
 	private Integer currX = 0;
 	private Integer currY = 0;
 	
@@ -100,6 +99,7 @@ public class DivGame implements GameInterface{
 	 * @return String The value to calculate, formatted as e.g. "64 / 8" 
 	 */
 	public String runGame(){
+		Random rand = new Random();
 		int count = 0;
 		do{
 			currX = rand.nextInt(13);
