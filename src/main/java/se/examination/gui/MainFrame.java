@@ -46,7 +46,6 @@ public class MainFrame implements ActionListener{
 	private JProgressBar progressBar;
 	private JLabel lblHejNamn;
 	private JLabel lblXTalet;
-	private JLabel lblCurrPoints;
 	private JLabel lblCompleted;
 	private JLabel lblResultError;
 	private JTextField textFieldSvar;
@@ -61,7 +60,6 @@ public class MainFrame implements ActionListener{
 	private JProgressBar progressBarDivision;
 	private JLabel lblHejNamnDivision;
 	private JLabel lblXTaletDivision;
-	private JLabel lblCurrPointsDivision;
 	private JLabel lblCompletedDivision;
 	private JLabel lblResultErrorDivision;
 	private JTextField textFieldSvarDivision;
@@ -99,7 +97,7 @@ public class MainFrame implements ActionListener{
 		frmMooldi.getContentPane().setLayout(new CardLayout(0, 0));
 		
 		//Create pages
-		startPage.setBackground(Color.CYAN);
+		startPage.setBackground(new Color(0, 255, 255));
 		frmMooldi.getContentPane().add(startPage, "name_23428416361482");
 		startPage.setLayout(null);
 		
@@ -170,11 +168,6 @@ public class MainFrame implements ActionListener{
 		lblHejNamn.setBounds(41, 43, 633, 79);
 		multiPage.add(lblHejNamn);
 		
-		lblCurrPoints = new JLabel("");
-		lblCurrPoints.setHorizontalAlignment(SwingConstants.CENTER);
-		lblCurrPoints.setBounds(229, 330, 288, 15);
-		multiPage.add(lblCurrPoints);		
-
 		lblCompleted = new JLabel("");
 		lblCompleted.setBounds(70, 410, 500, 15);
 		multiPage.add(lblCompleted);
@@ -229,11 +222,6 @@ public class MainFrame implements ActionListener{
 		lblHejNamnDivision.setBounds(41, 43, 633, 79);
 		divPage.add(lblHejNamnDivision);
 		
-		lblCurrPointsDivision = new JLabel("");
-		lblCurrPointsDivision.setHorizontalAlignment(SwingConstants.CENTER);
-		lblCurrPointsDivision.setBounds(229, 330, 288, 15);
-		divPage.add(lblCurrPointsDivision);		
-
 		lblCompletedDivision = new JLabel("");
 		lblCompletedDivision.setBounds(70, 410, 500, 15);
 		divPage.add(lblCompletedDivision);
@@ -286,13 +274,15 @@ public class MainFrame implements ActionListener{
 			game.newMultArray();
 		
 		lblHejNamn.setText("Hej " + textFieldName.getText() + "!");
-		lblCurrPoints.setText("ANTAL RÄTT DENNA OMGÅNG: " + player.getPoints());
 		lblCompleted.setText("Du har klarat av totalt " + player.getPoints() + " av " + MAX_MULTI + " tal.");
-		
+	
 		startPage.setVisible(false);
 		multiPage.setVisible(true);
-		
-		runGame("Multi");
+
+		if (player.getPoints() < MAX_MULTI)		
+			runGame("Multi");
+		//else
+			//TODO: GAME OVER!
 	}
 	
 	/**
@@ -307,13 +297,15 @@ public class MainFrame implements ActionListener{
 			gameDivision.newDivArray();
 		
 		lblHejNamnDivision.setText("Hej " + textFieldName.getText() + "!");
-		lblCurrPointsDivision.setText("ANTAL RÄTT DENNA OMGÅNG: " + player.getPoints());
 		lblCompletedDivision.setText("Du har klarat av totalt " + player.getPoints() + " av " + MAX_DIV + " tal.");
 		
 		startPage.setVisible(false);
 		divPage.setVisible(true);
 		
-		runGame("Div");
+		if (player.getPoints() < MAX_DIV)		
+			runGame("Div");
+		//else
+			//TODO: GAME OVER!
 	}
 
 
@@ -360,8 +352,10 @@ public class MainFrame implements ActionListener{
 						}	
 						lblCompleted.setText("Du har klarat av totalt " + player.getPoints() + " av " + MAX_MULTI + " tal.");
 						progressBar.setValue(player.getPoints());
-						lblCurrPoints.setText("ANTAL RÄTT DENNA OMGÅNG: " + player.getPoints());	
-						runGame("Multi");
+						if (player.getPoints() < MAX_MULTI)
+							runGame("Multi");
+						//else
+							//TODO: GAME OVER!
 				} else {
 					textFieldSvar.setText("");
 					lblResultError.setVisible(true);
@@ -376,8 +370,10 @@ public class MainFrame implements ActionListener{
 					lblCompletedDivision.setText("Du har klarat av totalt " + player.getPoints() + " av " + MAX_DIV + " tal.");
 					progressBarDivision.setValue(player.getPoints());
 					
-					lblCurrPointsDivision.setText("ANTAL RÄTT DENNA OMGÅNG: " + player.getPoints());	
-					runGame("Div");
+					if (player.getPoints() < MAX_DIV)
+						runGame("Div");
+					//else
+						//TODO: GAME OVER!
 				} else {
 					textFieldSvarDivision.setText("");
 					lblResultErrorDivision.setVisible(true);
