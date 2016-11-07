@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="TestSuite" time="0.117" tests="17" errors="0" skipped="0" failures="0">
+<testsuite name="TestSuite" time="0.282" tests="17" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="/usr/lib/jvm/java-8-oracle/jre/lib/i386"/>
@@ -24,7 +24,7 @@
     <property name="line.separator" value="&#10;"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="os.name" value="Linux"/>
-    <property name="classworlds.conf" value="/home/carina/workspace/.metadata/.plugins/org.eclipse.m2e.launching/launches/m2conf4455776232749585895.tmp"/>
+    <property name="classworlds.conf" value="/home/carina/workspace/.metadata/.plugins/org.eclipse.m2e.launching/launches/m2conf4026232501481070707.tmp"/>
     <property name="sun.jnu.encoding" value="UTF-8"/>
     <property name="java.library.path" value="/usr/lib/jvm/java-8-oracle/jre/lib/i386/client:/usr/lib/jvm/java-8-oracle/jre/lib/i386::/usr/java/packages/lib/i386:/lib:/usr/lib"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
@@ -59,21 +59,21 @@
     <property name="sun.desktop" value="gnome"/>
     <property name="sun.cpu.isalist" value=""/>
   </properties>
-  <testcase name="testCheckAnswer_false on testCheckAnswer_false(se.examination.otherclasses.DivGameTest)" classname="se.examination.otherclasses.DivGameTest" time="0.021"/>
-  <testcase name="testIsCleared_false on testIsCleared_false(se.examination.otherclasses.DivGameTest)" classname="se.examination.otherclasses.DivGameTest" time="0.007"/>
-  <testcase name="testIsCleared_true on testIsCleared_true(se.examination.otherclasses.DivGameTest)" classname="se.examination.otherclasses.DivGameTest" time="0.009"/>
-  <testcase name="testRunGame on testRunGame(se.examination.otherclasses.DivGameTest)" classname="se.examination.otherclasses.DivGameTest" time="0.001"/>
-  <testcase name="testNewDivArray_getResultArr on testNewDivArray_getResultArr(se.examination.otherclasses.DivGameTest)" classname="se.examination.otherclasses.DivGameTest" time="0.008"/>
-  <testcase name="testCheckAnswer_true on testCheckAnswer_true(se.examination.otherclasses.DivGameTest)" classname="se.examination.otherclasses.DivGameTest" time="0.013"/>
+  <testcase name="testCheckAnswer_false on testCheckAnswer_false(se.examination.otherclasses.DivGameTest)" classname="se.examination.otherclasses.DivGameTest" time="0.044"/>
+  <testcase name="testIsCleared_false on testIsCleared_false(se.examination.otherclasses.DivGameTest)" classname="se.examination.otherclasses.DivGameTest" time="0.027"/>
+  <testcase name="testIsCleared_true on testIsCleared_true(se.examination.otherclasses.DivGameTest)" classname="se.examination.otherclasses.DivGameTest" time="0.021"/>
+  <testcase name="testRunGame on testRunGame(se.examination.otherclasses.DivGameTest)" classname="se.examination.otherclasses.DivGameTest" time="0.004"/>
+  <testcase name="testNewDivArray_getResultArr on testNewDivArray_getResultArr(se.examination.otherclasses.DivGameTest)" classname="se.examination.otherclasses.DivGameTest" time="0.017"/>
+  <testcase name="testCheckAnswer_true on testCheckAnswer_true(se.examination.otherclasses.DivGameTest)" classname="se.examination.otherclasses.DivGameTest" time="0.031"/>
   <testcase name="testSetAndGetPoints on testSetAndGetPoints(se.examination.otherclasses.PlayerTest)" classname="se.examination.otherclasses.PlayerTest" time="0"/>
-  <testcase name="testSetAndGetCompleted on testSetAndGetCompleted(se.examination.otherclasses.PlayerTest)" classname="se.examination.otherclasses.PlayerTest" time="0.001"/>
+  <testcase name="testSetAndGetCompleted on testSetAndGetCompleted(se.examination.otherclasses.PlayerTest)" classname="se.examination.otherclasses.PlayerTest" time="0.002"/>
   <testcase name="testIncreasePoints on testIncreasePoints(se.examination.otherclasses.PlayerTest)" classname="se.examination.otherclasses.PlayerTest" time="0.001"/>
-  <testcase name="testSetAndGetName on testSetAndGetName(se.examination.otherclasses.PlayerTest)" classname="se.examination.otherclasses.PlayerTest" time="0"/>
-  <testcase name="testIncreaseCompleted on testIncreaseCompleted(se.examination.otherclasses.PlayerTest)" classname="se.examination.otherclasses.PlayerTest" time="0"/>
-  <testcase name="testCheckAnswer_false on testCheckAnswer_false(se.examination.otherclasses.MultiGameTest)" classname="se.examination.otherclasses.MultiGameTest" time="0.01"/>
-  <testcase name="testNewMultArray_getResultArr on testNewMultArray_getResultArr(se.examination.otherclasses.MultiGameTest)" classname="se.examination.otherclasses.MultiGameTest" time="0.006"/>
-  <testcase name="testIsCleared on testIsCleared(se.examination.otherclasses.MultiGameTest)" classname="se.examination.otherclasses.MultiGameTest" time="0.007"/>
-  <testcase name="testRunGame on testRunGame(se.examination.otherclasses.MultiGameTest)" classname="se.examination.otherclasses.MultiGameTest" time="0.001"/>
-  <testcase name="testCheckAnswer_true on testCheckAnswer_true(se.examination.otherclasses.MultiGameTest)" classname="se.examination.otherclasses.MultiGameTest" time="0.027"/>
-  <testcase name="testSaveDivGameToFile on testSaveDivGameToFile(se.examination.otherclasses.FileHandlerTest)" classname="se.examination.otherclasses.FileHandlerTest" time="0.005"/>
+  <testcase name="testSetAndGetName on testSetAndGetName(se.examination.otherclasses.PlayerTest)" classname="se.examination.otherclasses.PlayerTest" time="0.004"/>
+  <testcase name="testIncreaseCompleted on testIncreaseCompleted(se.examination.otherclasses.PlayerTest)" classname="se.examination.otherclasses.PlayerTest" time="0.005"/>
+  <testcase name="testCheckAnswer_false on testCheckAnswer_false(se.examination.otherclasses.MultiGameTest)" classname="se.examination.otherclasses.MultiGameTest" time="0.028"/>
+  <testcase name="testNewMultArray_getResultArr on testNewMultArray_getResultArr(se.examination.otherclasses.MultiGameTest)" classname="se.examination.otherclasses.MultiGameTest" time="0.008"/>
+  <testcase name="testIsCleared on testIsCleared(se.examination.otherclasses.MultiGameTest)" classname="se.examination.otherclasses.MultiGameTest" time="0.029"/>
+  <testcase name="testRunGame on testRunGame(se.examination.otherclasses.MultiGameTest)" classname="se.examination.otherclasses.MultiGameTest" time="0.002"/>
+  <testcase name="testCheckAnswer_true on testCheckAnswer_true(se.examination.otherclasses.MultiGameTest)" classname="se.examination.otherclasses.MultiGameTest" time="0.048"/>
+  <testcase name="testSaveDivGameToFile on testSaveDivGameToFile(se.examination.otherclasses.FileHandlerTest)" classname="se.examination.otherclasses.FileHandlerTest" time="0.011"/>
 </testsuite>
