@@ -38,6 +38,7 @@ public class MainFrame implements ActionListener{
 	//Common
 	private FileHandler fileHandler = new FileHandler();
 	private Player player = new Player();
+	private char gameType;
 
 	//MultiPage
 	private JPanel multiPage = new JPanel();	
@@ -51,7 +52,7 @@ public class MainFrame implements ActionListener{
 	private JTextField textFieldSvar;
 	private JButton btnSluta;
 	private JButton btnOKnext;
-	private final int MAX_MULTI = 679;  	//TODO hitta metoden som summerar element i matrisen
+	private final int MAX_MULTI = 5; //679;  	
 	
 	//DivPage
 	private JPanel divPage = new JPanel();
@@ -65,7 +66,13 @@ public class MainFrame implements ActionListener{
 	private JTextField textFieldSvarDivision;
 	private JButton btnSlutaDivision;
 	private JButton btnOKnextDivision;
-	private final int MAX_DIV = 583;
+	private final int MAX_DIV = 5; //583;
+
+	//Congratulation page
+	private JPanel congratsPage = new JPanel();
+	private JLabel lblGrattis = new JLabel("");
+	private JLabel lblDuHarKlarat = new JLabel("");
+	private JButton btnClose = new JButton("Stäng");
 
 
 	/**
@@ -101,7 +108,7 @@ public class MainFrame implements ActionListener{
 		frmMooldi.getContentPane().add(startPage, "name_23428416361482");
 		startPage.setLayout(null);
 		
-		multiPage.setBackground(Color.BLUE);
+		multiPage.setBackground(Color.GREEN);
 		frmMooldi.getContentPane().add(multiPage, "name_23490729527832");
 		multiPage.setLayout(null);
 		
@@ -109,11 +116,16 @@ public class MainFrame implements ActionListener{
 		frmMooldi.getContentPane().add(divPage, "name_271421026775");
 		divPage.setLayout(null);
 		
+		congratsPage.setBackground(Color.YELLOW);
+		frmMooldi.getContentPane().add(congratsPage, "name_2783046100684");
+		congratsPage.setLayout(null);
+		
 		//Add components to pages
 		createStartPageGUI();
 		createMultiPageGUI();
 		createDivPageGUI();
-		
+		createCongratsPageGUI();
+				
 	}
 
 	/**
@@ -163,7 +175,7 @@ public class MainFrame implements ActionListener{
 
 		//Labels and text fields
 		lblHejNamn = new JLabel();
-		lblHejNamn.setForeground(Color.LIGHT_GRAY);
+		lblHejNamn.setForeground(Color.DARK_GRAY);
 		lblHejNamn.setFont(new Font("Dialog", Font.PLAIN, 55));
 		lblHejNamn.setBounds(41, 43, 633, 79);
 		multiPage.add(lblHejNamn);
@@ -261,6 +273,28 @@ public class MainFrame implements ActionListener{
 		divPage.add(progressBarDivision);
 		
 	}
+	
+	/**
+	 * Initialize the contents of congratulation page.
+	 */
+	public void createCongratsPageGUI(){
+		lblGrattis.setForeground(Color.BLUE);
+		lblGrattis.setHorizontalAlignment(SwingConstants.CENTER);
+		lblGrattis.setFont(new Font("Century Schoolbook L", Font.BOLD, 48));
+		lblGrattis.setBounds(71, 124, 614, 127);
+		congratsPage.add(lblGrattis);
+		
+		lblDuHarKlarat.setForeground(Color.BLUE);
+		lblDuHarKlarat.setHorizontalAlignment(SwingConstants.CENTER);
+		lblDuHarKlarat.setFont(new Font("Century Schoolbook L", Font.BOLD, 24));
+		lblDuHarKlarat.setBounds(71, 236, 626, 100);
+		congratsPage.add(lblDuHarKlarat);
+		
+		btnClose.setForeground(Color.BLACK);
+		btnClose.setBackground(Color.WHITE);
+		btnClose.setBounds(319, 447, 117, 25);
+		congratsPage.add(btnClose);
+	}
 
 	/**
 	 * Initiate game when user selects to play Multiplication. 
@@ -279,7 +313,7 @@ public class MainFrame implements ActionListener{
 		startPage.setVisible(false);
 		multiPage.setVisible(true);
 
-		runGame("Multi");
+		runGame();
 	}
 	
 	/**
@@ -299,16 +333,15 @@ public class MainFrame implements ActionListener{
 		startPage.setVisible(false);
 		divPage.setVisible(true);
 		
-		runGame("Div");
+		runGame();
 	}
 
 
 	/**
 	 * Initiate a new game round by cleaning up the page, get a new random number to calculate and start the timer. 
-	 * @param type Either "Multi" or "Div"
 	 */
-	public void runGame(String type){
-		if (type == "Multi"){
+	public void runGame(){
+		if (gameType == 'm'){
 			if ((player.getPoints() < MAX_MULTI) && (player.getCompleted() < 169)){
 				lblResultError.setVisible(false);
 				progressBar.setValue(player.getPoints());
@@ -320,10 +353,13 @@ public class MainFrame implements ActionListener{
 					timer.restart(); 
 			}
 			else {
-				//TODO: GAME OVER!
+				lblGrattis.setText("Grattis " + player.getName() + "!");
+				lblDuHarKlarat.setText("Du har klarat hela multiplikationstabellen!");
+				multiPage.setVisible(false);
+				congratsPage.setVisible(true);
 			}
 		}
-		else if (type == "Div"){
+		else if (gameType == 'd'){
 			if ((player.getPoints() < MAX_DIV) && (player.getCompleted() < 169)){
 				lblResultErrorDivision.setVisible(false);
 				progressBarDivision.setValue(player.getPoints());
@@ -335,7 +371,10 @@ public class MainFrame implements ActionListener{
 					timerDiv.restart(); 
 			}
 			else {
-				//TODO: GAME OVER!
+				lblGrattis.setText("Grattis " + player.getName() + "!");
+				lblDuHarKlarat.setText("Du har klarat hela divisionstabellen!");
+				divPage.setVisible(false);
+				congratsPage.setVisible(true);
 			}
 		}
 	}
@@ -344,11 +383,10 @@ public class MainFrame implements ActionListener{
 	 * Check if answer is correct when user enters an answer and either press Enter or OK-button. 
 	 * If correct: update progressbar and run a new game round.
 	 * If wrong: show error message.
-	 * @param type Either "Multi" or "Div"
 	 */
-	public void onAnswering(String type){
+	public void onAnswering(){
 		try{
-			if (type == "Multi"){
+			if (gameType == 'm'){
 				if (game.checkAnswer(Integer.parseInt(textFieldSvar.getText())) == true){
 					player.increasePoints();
 					if (game.isCleared()){
@@ -356,13 +394,13 @@ public class MainFrame implements ActionListener{
 					}	
 					lblCompleted.setText("Du har klarat av totalt " + player.getPoints() + " av " + MAX_MULTI + " tal.");
 					progressBar.setValue(player.getPoints());
-					runGame("Multi");
+					runGame();
 				} else {
 					textFieldSvar.setText("");
 					lblResultError.setVisible(true);
 				}
 			}
-			else if (type == "Div"){
+			else if (gameType == 'd'){
 				if (gameDivision.checkAnswer(Integer.parseInt(textFieldSvarDivision.getText())) == true){
 					player.increasePoints();
 					if (gameDivision.isCleared()){
@@ -371,7 +409,7 @@ public class MainFrame implements ActionListener{
 					lblCompletedDivision.setText("Du har klarat av totalt " + player.getPoints() + " av " + MAX_DIV + " tal.");
 					progressBarDivision.setValue(player.getPoints());
 					
-					runGame("Div");
+					runGame();
 				} else {
 					textFieldSvarDivision.setText("");
 					lblResultErrorDivision.setVisible(true);
@@ -385,13 +423,12 @@ public class MainFrame implements ActionListener{
 
 	/**
 	 * Save game - when user press Save-button
-	 * @param type Either "Multi" or "Div"
 	 */
-	public void saveGame(String type){
-		if (type == "Multi"){
+	public void saveGame(){
+		if (gameType == 'm'){
 			fileHandler.saveMultiGameToFile(player, game);	
 		}
-		else if (type == "Div"){
+		else if (gameType == 'd'){
 			fileHandler.saveDivGameToFile(player, gameDivision);
 		}
 		System.exit(0);
@@ -417,6 +454,9 @@ public class MainFrame implements ActionListener{
 		btnSlutaDivision.addActionListener(this);
 		btnOKnextDivision.addActionListener(this);
 		timerDiv.addActionListener(this);
+		
+		//CongratsPage
+		btnClose.addActionListener(this);
 	}
 
 	/**
@@ -426,32 +466,39 @@ public class MainFrame implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		//StartPage
 		if (e.getSource() == btnMulti) {
+			gameType = 'm';
 			onClickMulti();			
 		}
 		if (e.getSource() == btnDivision) {
+			gameType = 'd';
 			onClickDivision();			
 		}
 		
 		//MultiPage
 		if ((e.getSource() == textFieldSvar)||(e.getSource() == btnOKnext)) {
-			onAnswering("Multi");			
+			onAnswering();			
 		}
 		if (e.getSource() == btnSluta)  {
-			saveGame("Multi");			
+			saveGame();			
 		}
 		if (e.getSource() == timer){
-			runGame("Multi");
+			runGame();
 		}
 
 		//DivPage
 		if ((e.getSource() == textFieldSvarDivision)||(e.getSource() == btnOKnextDivision)) {
-			onAnswering("Div");			
+			onAnswering();			
 		}
 		if (e.getSource() == btnSlutaDivision) {
-			saveGame("Div");
+			saveGame();
 		}
 		if (e.getSource() == timerDiv){
-			runGame("Div");
+			runGame();
+		}
+		
+		//CongratsPage
+		if (e.getSource() == btnClose)  {
+			saveGame();			
 		}
 		
 	}
