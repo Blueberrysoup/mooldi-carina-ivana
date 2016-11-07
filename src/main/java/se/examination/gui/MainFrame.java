@@ -7,7 +7,6 @@ package se.examination.gui;
 
 import java.awt.CardLayout;
 import java.awt.Color;
-//import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -29,58 +28,64 @@ import se.examination.otherclasses.Player;
 
 public class MainFrame implements ActionListener{
 
+	//MainFrame and StartPage
 	private JFrame frmMooldi;
+	private JPanel startPage = new JPanel();
 	private JTextField textFieldName;
 	private JButton btnMulti;
 	private JButton btnDivision;
-	private JPanel startPage = new JPanel();
-	private JPanel multiPage = new JPanel();
-	private JPanel divPage = new JPanel();
-	private JLabel lblHejNamn;
-	private JLabel lblHejNamnDivision;
-	private Player player = new Player();
-	private MultiGame game = new MultiGame();
-	private DivGame gameDivision= new DivGame();
+	
+	//Common
 	private FileHandler fileHandler = new FileHandler();
+	private Player player = new Player();
+
+	//MultiPage
+	private JPanel multiPage = new JPanel();	
+	private MultiGame game = new MultiGame();
 	private Timer timer = new Timer(10000,null);
-	private Timer timerDiv = new Timer(15000,null);
-	private JButton btnSluta;
-	private JLabel lblXTalet;
-	private JTextField textFieldSvar;
-	private JLabel labelCurrPoints;
-	private JLabel labelCompleted;
-	private JButton btnOKnext;
-	private JLabel labelResultError;
 	private JProgressBar progressBar;
-	private JButton btnSlutaDivision;
-	private JLabel lblXTaletDivision;
-	private JTextField textFieldSvarDivision;
-	private JLabel labelCurrPointsDivision;
-	private JLabel labelCompletedDivision;
-	private JButton btnOKnextDivision;
-	private JLabel labelResultErrorDivision;
+	private JLabel lblHejNamn;
+	private JLabel lblXTalet;
+	private JLabel lblCurrPoints;
+	private JLabel lblCompleted;
+	private JLabel lblResultError;
+	private JTextField textFieldSvar;
+	private JButton btnSluta;
+	private JButton btnOKnext;
+	private final int MAX_MULTI = 679;  	//TODO hitta metoden som summerar element i matrisen
+	
+	//DivPage
+	private JPanel divPage = new JPanel();
+	private DivGame gameDivision= new DivGame();
+	private Timer timerDiv = new Timer(15000,null);
 	private JProgressBar progressBarDivision;
-
+	private JLabel lblHejNamnDivision;
+	private JLabel lblXTaletDivision;
+	private JLabel lblCurrPointsDivision;
+	private JLabel lblCompletedDivision;
+	private JLabel lblResultErrorDivision;
+	private JTextField textFieldSvarDivision;
+	private JButton btnSlutaDivision;
+	private JButton btnOKnextDivision;
+	private final int MAX_DIV = 583;
 
 
 	/**
-	 * Launch the application.
-	 */
-	
-	public static void main(String[] args) {
-		MainFrame window = new MainFrame();
-		window.frmMooldi.setVisible(true);
-	}
-	
-
-	/**
-	 * Create the application.
+	 * Constructor - create the application.
 	 */
 	public MainFrame() {
-		System.out.println("mainFrame constructor entered");
 		createGUI();
 		addActionListeners();
 	}
+
+	/**
+	 * Get Mooldi frame
+	 * @return frmMooldi Main frame for Mooldi application
+	 */
+	public JFrame getFrmMooldi(){
+		return frmMooldi;
+	}
+	
 
 	/**
 	 * Initialize the contents of the main frame.
@@ -117,7 +122,7 @@ public class MainFrame implements ActionListener{
 	 * Initialize the contents of start page
 	 */
 	public void createStartPageGUI(){
-		//Labels - text fields
+		//Labels and text fields
 		JLabel lblVlkommenTill = new JLabel("Välkommen till");
 		lblVlkommenTill.setBounds(325, 91, 103, 15);
 		startPage.add(lblVlkommenTill);
@@ -142,7 +147,6 @@ public class MainFrame implements ActionListener{
 
 		//Buttons
 		btnMulti = new JButton("Multiplikation");
-		
 		btnMulti.setBounds(192, 397, 143, 25);
 		startPage.add(btnMulti);
 		
@@ -155,46 +159,46 @@ public class MainFrame implements ActionListener{
 	 * Initialize the contents of multiplication page.
 	 */
 	public void createMultiPageGUI(){
-		//Labels - text fields
+		JLayeredPane layeredPane = new JLayeredPane();
+		layeredPane.setBounds(0, 0, 1, 1);
+		multiPage.add(layeredPane);
+
+		//Labels and text fields
 		lblHejNamn = new JLabel();
 		lblHejNamn.setForeground(Color.LIGHT_GRAY);
 		lblHejNamn.setFont(new Font("Dialog", Font.PLAIN, 55));
 		lblHejNamn.setBounds(41, 43, 633, 79);
 		multiPage.add(lblHejNamn);
 		
-		JLayeredPane layeredPane = new JLayeredPane();
-		layeredPane.setBounds(0, 0, 1, 1);
-		multiPage.add(layeredPane);
-		
-		labelCurrPoints = new JLabel("");
-		labelCurrPoints.setHorizontalAlignment(SwingConstants.CENTER);
-		labelCurrPoints.setBounds(279, 333, 188, 15);
-		multiPage.add(labelCurrPoints);		
+		lblCurrPoints = new JLabel("");
+		lblCurrPoints.setHorizontalAlignment(SwingConstants.CENTER);
+		lblCurrPoints.setBounds(279, 333, 188, 15);
+		multiPage.add(lblCurrPoints);		
 
-		labelCompleted = new JLabel("");
-		labelCompleted.setBounds(70, 410, 500, 15);
-		multiPage.add(labelCompleted);
+		lblCompleted = new JLabel("");
+		lblCompleted.setBounds(70, 410, 500, 15);
+		multiPage.add(lblCompleted);
 
 		lblXTalet = new JLabel();
 		lblXTalet.setHorizontalAlignment(SwingConstants.CENTER);
 		lblXTalet.setFont(new Font("Dialog", Font.BOLD, 32));
-		lblXTalet.setBounds(306, 168, 133, 79);
+		lblXTalet.setBounds(270, 168, 200, 79);
 		multiPage.add(lblXTalet);
 		
 		textFieldSvar = new JTextField();
 		textFieldSvar.setBounds(301, 256, 138, 36);
-		multiPage.add(textFieldSvar);
 		textFieldSvar.setColumns(10);
 		textFieldSvar.requestFocusInWindow();
+		multiPage.add(textFieldSvar);
 				
-		labelResultError = new JLabel("Tyvärr var det fel svar - försök igen!");
-		labelResultError.setFont(new Font("Dialog", Font.BOLD | Font.ITALIC, 18));
-		labelResultError.setForeground(Color.RED);
-		labelResultError.setHorizontalAlignment(SwingConstants.CENTER);
-		labelResultError.setBounds(122, 304, 509, 34);
-		multiPage.add(labelResultError);
+		lblResultError = new JLabel("Tyvärr var det fel svar - försök igen!");
+		lblResultError.setFont(new Font("Dialog", Font.BOLD | Font.ITALIC, 18));
+		lblResultError.setForeground(Color.RED);
+		lblResultError.setHorizontalAlignment(SwingConstants.CENTER);
+		lblResultError.setBounds(122, 304, 509, 34);
+		multiPage.add(lblResultError);
 
-		//Button
+		//Buttons
 		btnSluta = new JButton("Sluta spela och spara poängen");
 		btnSluta.setBounds(419, 440, 255, 25);
 		multiPage.add(btnSluta);
@@ -205,56 +209,55 @@ public class MainFrame implements ActionListener{
 		
 		//Progressbar
 		progressBar = new JProgressBar();
-		progressBar.setMaximum(679);//TODO hitta metoden som sumerar elementer i matrisen
+		progressBar.setMaximum(MAX_MULTI);				
 		progressBar.setBounds(70, 437, 148, 14);
-		multiPage.add(progressBar);
-		
+		multiPage.add(progressBar);	
 	}
 	
 	/**
-	 * Initialize the contents of multiplication page.
+	 * Initialize the contents of division page.
 	 */
 	public void createDivPageGUI(){
-		//Labels - text fields
+		JLayeredPane layeredPaneDivision = new JLayeredPane();
+		layeredPaneDivision.setBounds(0, 0, 1, 1);
+		divPage.add(layeredPaneDivision);
+		
+		//Labels and text fields
 		lblHejNamnDivision = new JLabel();
 		lblHejNamnDivision.setForeground(Color.DARK_GRAY);
 		lblHejNamnDivision.setFont(new Font("Dialog", Font.PLAIN, 55));
 		lblHejNamnDivision.setBounds(41, 43, 633, 79);
 		divPage.add(lblHejNamnDivision);
 		
-		JLayeredPane layeredPaneDivision = new JLayeredPane();
-		layeredPaneDivision.setBounds(0, 0, 1, 1);
-		divPage.add(layeredPaneDivision);
-		
-		labelCurrPointsDivision = new JLabel("");
-		labelCurrPointsDivision.setHorizontalAlignment(SwingConstants.CENTER);
-		labelCurrPointsDivision.setBounds(279, 333, 188, 15);
-		divPage.add(labelCurrPointsDivision);		
+		lblCurrPointsDivision = new JLabel("");
+		lblCurrPointsDivision.setHorizontalAlignment(SwingConstants.CENTER);
+		lblCurrPointsDivision.setBounds(279, 333, 188, 15);
+		divPage.add(lblCurrPointsDivision);		
 
-		labelCompletedDivision = new JLabel("");
-		labelCompletedDivision.setBounds(70, 410, 500, 15);
-		divPage.add(labelCompletedDivision);
+		lblCompletedDivision = new JLabel("");
+		lblCompletedDivision.setBounds(70, 410, 500, 15);
+		divPage.add(lblCompletedDivision);
 
 		lblXTaletDivision = new JLabel();
-		lblXTaletDivision.setHorizontalAlignment(SwingConstants.LEFT);
+		lblXTaletDivision.setHorizontalAlignment(SwingConstants.CENTER);
 		lblXTaletDivision.setFont(new Font("Dialog", Font.BOLD, 32));
-		lblXTaletDivision.setBounds(306, 168, 234, 79);
+		lblXTaletDivision.setBounds(270, 168, 200, 79);
 		divPage.add(lblXTaletDivision);
 		
 		textFieldSvarDivision = new JTextField();
 		textFieldSvarDivision.setBounds(301, 256, 138, 36);
-		divPage.add(textFieldSvarDivision);
 		textFieldSvarDivision.setColumns(10);
 		textFieldSvarDivision.requestFocusInWindow();
+		divPage.add(textFieldSvarDivision);
 				
-		labelResultErrorDivision = new JLabel("Tyvärr var det fel svar - försök igen!");
-		labelResultErrorDivision.setFont(new Font("Dialog", Font.BOLD | Font.ITALIC, 18));
-		labelResultErrorDivision.setForeground(Color.RED);
-		labelResultErrorDivision.setHorizontalAlignment(SwingConstants.CENTER);
-		labelResultErrorDivision.setBounds(122, 304, 509, 34);
-		divPage.add(labelResultErrorDivision);
+		lblResultErrorDivision = new JLabel("Tyvärr var det fel svar - försök igen!");
+		lblResultErrorDivision.setFont(new Font("Dialog", Font.BOLD | Font.ITALIC, 18));
+		lblResultErrorDivision.setForeground(Color.RED);
+		lblResultErrorDivision.setHorizontalAlignment(SwingConstants.CENTER);
+		lblResultErrorDivision.setBounds(122, 304, 509, 34);
+		divPage.add(lblResultErrorDivision);
 
-		//Button
+		//Buttons
 		btnSlutaDivision = new JButton("Sluta spela och spara poängen");
 		btnSlutaDivision.setBounds(419, 440, 255, 25);
 		divPage.add(btnSlutaDivision);
@@ -265,31 +268,36 @@ public class MainFrame implements ActionListener{
 		
 		//Progressbar
 		progressBarDivision = new JProgressBar();
-		progressBarDivision.setMaximum(583);
+		progressBarDivision.setMaximum(MAX_DIV);
 		progressBarDivision.setBounds(70, 437, 148, 14);
 		divPage.add(progressBarDivision);
 		
 	}
 
 	/**
-	 * Initialize game when user selects to run Multiplication
+	 * Initiate game when user selects to play Multiplication. 
+	 * Opens saved file if the user has played before, otherwise create a new game structure. 
+	 * Show multiplication page with data from the saved file (if it exists).
 	 */
 	public void onClickMulti(){
 		player.setName(textFieldName.getText());
 		
-		if (!fileHandler.startMultiGame(player, game)) 	//if this user not already has an ongoing game			
+		if (!fileHandler.startMultiGame(player, game)) 			//if this user not already has an ongoing game			
 			game.newMultArray();
 		
 		lblHejNamn.setText("Hej " + textFieldName.getText() + "!");
-		labelCurrPoints.setText("ANTAL RÄTT: " + player.getPoints());
-		labelCompleted.setText("Du har klarat av " + player.getPoints() + " av 679 tal.");
+		lblCurrPoints.setText("ANTAL RÄTT: " + player.getPoints());
+		lblCompleted.setText("Du har klarat av " + player.getPoints() + " av " + MAX_MULTI + " tal.");
 		
 		startPage.setVisible(false);
 		multiPage.setVisible(true);
 		
-		runGame();
+		runGame("Multi");
 	}
 	
+	/**
+	 * Initialize game when user selects to run Division
+	 */
 	public void onClickDivision(){
 		player.setName(textFieldName.getText());
 		
@@ -297,114 +305,116 @@ public class MainFrame implements ActionListener{
 			gameDivision.newDivArray();
 		
 		lblHejNamnDivision.setText("Hej " + textFieldName.getText() + "!");
-		labelCurrPointsDivision.setText("ANTAL RÄTT: " + player.getPoints());
-		labelCompletedDivision.setText("Du har klarat av " + player.getPoints() + " av 583 tal.");
+		lblCurrPointsDivision.setText("ANTAL RÄTT: " + player.getPoints());
+		lblCompletedDivision.setText("Du har klarat av " + player.getPoints() + " av " + MAX_DIV + " tal.");
 		
 		startPage.setVisible(false);
 		divPage.setVisible(true);
 		
-		runDivGame();
+		runGame("Div");
 	}
 
 
 	/**
 	 * Fetch new numbers to calculate
 	 */
-	public void runGame(){
-		labelResultError.setVisible(false);
-		progressBar.setValue(player.getPoints());
-		textFieldSvar.setText("");
-		lblXTalet.setText(game.runGame());
-		if (!timer.isRunning())
-			timer.start();
-		else
-			timer.restart(); 
+	public void runGame(String type){
+		if (type == "Multi"){
+			lblResultError.setVisible(false);
+			progressBar.setValue(player.getPoints());
+			textFieldSvar.setText("");
+			lblXTalet.setText(game.runGame());
+			if (!timer.isRunning())
+				timer.start();
+			else
+				timer.restart(); 
+		}
+		else if (type == "Div"){
+			lblResultErrorDivision.setVisible(false);
+			progressBarDivision.setValue(player.getPoints());
+			textFieldSvarDivision.setText("");
+			lblXTaletDivision.setText(gameDivision.runGame());
+			if (!timerDiv.isRunning())
+				timerDiv.start();
+			else
+				timerDiv.restart(); 
+		}
 	}
-	
-	public void runDivGame(){
-		labelResultErrorDivision.setVisible(false);
-		progressBarDivision.setValue(player.getPoints());
-		textFieldSvarDivision.setText("");
-		lblXTaletDivision.setText(gameDivision.runGame());
-		if (!timerDiv.isRunning())
-			timerDiv.start();
-		else
-			timerDiv.restart(); 
-	}
-	
+		
 	/**
 	 * Check if answer is correct when user enters an answer and either press Enter or OK-button. 
 	 */
-	public void onAnswering(){
+	public void onAnswering(String type){
 		try{
-			if (game.checkAnswer(Integer.parseInt(textFieldSvar.getText())) == true){
-					player.increasePoints();
-					if (game.isCleared()){
-						player.increaseCompleted();
-					}	
-					labelCompleted.setText("Du har klarat av " + player.getPoints() + " av 679 tal.");
-					progressBar.setValue(player.getPoints());
-					labelCurrPoints.setText("ANTAL RÄTT: " + player.getPoints());	
-					runGame();
-			} else {
-				textFieldSvar.setText("");
-				labelResultError.setVisible(true);
+			if (type == "Multi"){
+				if (game.checkAnswer(Integer.parseInt(textFieldSvar.getText())) == true){
+						player.increasePoints();
+						if (game.isCleared()){
+							player.increaseCompleted();
+						}	
+						lblCompleted.setText("Du har klarat av " + player.getPoints() + " av " + MAX_MULTI + " tal.");
+						progressBar.setValue(player.getPoints());
+						lblCurrPoints.setText("ANTAL RÄTT: " + player.getPoints());	
+						runGame("Multi");
+				} else {
+					textFieldSvar.setText("");
+					lblResultError.setVisible(true);
+				}
 			}
-		} catch (NumberFormatException e){
-			e.getMessage();
-		}
-	}
-
-	public void onAnsweringDiv(){
-		try{
-			if (gameDivision.checkAnswer(Integer.parseInt(textFieldSvarDivision.getText())) == true){
+			else if (type == "Div"){
+				if (gameDivision.checkAnswer(Integer.parseInt(textFieldSvarDivision.getText())) == true){
 					player.increasePoints();
 					if (gameDivision.isCleared()){
 						player.increaseCompleted();
 					}
-					labelCompletedDivision.setText("Du har klarat av " + player.getPoints() + " av 583 tal.");
+					lblCompletedDivision.setText("Du har klarat av " + player.getPoints() + " av " + MAX_DIV + " tal.");
 					progressBarDivision.setValue(player.getPoints());
 					
-					labelCurrPointsDivision.setText("ANTAL RÄTT: " + player.getPoints());	
-					runDivGame();
-			} else {
-				textFieldSvarDivision.setText("");
-				labelResultErrorDivision.setVisible(true);
+					lblCurrPointsDivision.setText("ANTAL RÄTT: " + player.getPoints());	
+					runGame("Div");
+				} else {
+					textFieldSvarDivision.setText("");
+					lblResultErrorDivision.setVisible(true);
+				}				
 			}
 		} catch (NumberFormatException e){
 			e.getMessage();
 		}
 	}
-
 	
 
 	/**
 	 * Save game - when user presses Save-button
 	 */
-	public void saveGame(){
-		
-		fileHandler.saveMultiGameToFile(player, game);	
+	public void saveGame(String type){
+		if (type == "Multi"){
+			fileHandler.saveMultiGameToFile(player, game);	
+		}
+		else if (type == "Div"){
+			fileHandler.saveDivGameToFile(player, gameDivision);
+		}
 		System.exit(0);
 	}
 	
-	public void saveDivGame(){
-		fileHandler.saveDivGameToFile(player, gameDivision);
-		System.exit(0);
-	}
 
 	/**
 	 * Action listeners
 	 */	
 	public void addActionListeners() {
+		//StartPage
 		btnMulti.addActionListener(this);	
 		btnDivision.addActionListener(this);
+		
+		//MultiPage
 		textFieldSvar.addActionListener(this);
 		btnSluta.addActionListener(this);
 		btnOKnext.addActionListener(this);
+		timer.addActionListener(this);
+		
+		//DivPage
 		textFieldSvarDivision.addActionListener(this);
 		btnSlutaDivision.addActionListener(this);
 		btnOKnextDivision.addActionListener(this);
-		timer.addActionListener(this);
 		timerDiv.addActionListener(this);
 	}
 
@@ -413,32 +423,34 @@ public class MainFrame implements ActionListener{
 	 */	
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		//StartPage
 		if (e.getSource() == btnMulti) {
 			onClickMulti();			
 		}
 		if (e.getSource() == btnDivision) {
 			onClickDivision();			
 		}
+		
+		//MultiPage
 		if ((e.getSource() == textFieldSvar)||(e.getSource() == btnOKnext)) {
-			onAnswering();			
-		}
-		if ((e.getSource() == textFieldSvarDivision)||(e.getSource() == btnOKnextDivision)) {
-			onAnsweringDiv();			
+			onAnswering("Multi");			
 		}
 		if (e.getSource() == btnSluta)  {
-			saveGame();			
+			saveGame("Multi");			
 		}
-		
-		if (e.getSource() == btnSlutaDivision) {
-			saveDivGame();
-		}
-		
 		if (e.getSource() == timer){
-			runGame();
+			runGame("Multi");
 		}
-		
+
+		//DivPage
+		if ((e.getSource() == textFieldSvarDivision)||(e.getSource() == btnOKnextDivision)) {
+			onAnswering("Div");			
+		}
+		if (e.getSource() == btnSlutaDivision) {
+			saveGame("Div");
+		}
 		if (e.getSource() == timerDiv){
-			runDivGame();
+			runGame("Div");
 		}
 		
 	}

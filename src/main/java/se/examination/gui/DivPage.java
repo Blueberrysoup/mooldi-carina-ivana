@@ -5,11 +5,8 @@
 **/
 package se.examination.gui;
 
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
 
 public class DivPage {
-
+	//TODO Split class MainFrame into three classes
 
 }
