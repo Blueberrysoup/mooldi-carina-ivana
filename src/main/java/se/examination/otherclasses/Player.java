@@ -20,7 +20,7 @@ public class Player {
 
 	/**
 	 * Set current player's name
-	 * @param String Current player's name
+	 * @param name Current player's name
 	 */
 	public void setName(String name) {
 		this.name = name;

@@ -15,7 +15,7 @@ public class FileHandler {
 
 	/**
 	 * Fetches information on the player, and the player's total results. 
-	 * Writes to a textfile named as <player's name>_multi.txt
+	 * Writes to a textfile named as NAME_multi.txt
 	 * Note! Currently the folder gamefiles must exist - in next version this folder will be created if it doesn't exist
 	 * @param player The current Player object
 	 * @param game The current MultiGame object
@@ -53,7 +53,7 @@ public class FileHandler {
 
 	/**
 	 * Fetches information on the player, and the player's total results. 
-	 * Writes to a textfile named as <player's name>_div.txt
+	 * Writes to a textfile named as NAME_div.txt
 	 * Note! Currently the folder gamefiles must exist - in next version this folder will be created if it doesn't exist
 	 * @param player The current Player object
 	 * @param game The current DivGame object
@@ -91,7 +91,7 @@ public class FileHandler {
 	}
 
 	/**
-	 * Checks if a file <player's name>_multi.txt exists. If so, reads the file 
+	 * Checks if a file NAME_multi.txt exists. If so, reads the file 
 	 * and saves the values as current player's results.
 	 * @param player The current Player object
 	 * @param game The current MultiGame object
@@ -125,7 +125,7 @@ public class FileHandler {
 	}
 
 	/**
-	 * Checks if a file <player's name>_div.txt exists.
+	 * Checks if a file NAME_div.txt exists.
 	 * Reads the file and saves the values as current player's results.
 	 * @param player The current Player object
 	 * @param game The current DivGame object
