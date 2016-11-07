@@ -94,7 +94,7 @@ public class MultiGame implements GameInterface{
 			currX = rand.nextInt(13);
 			currY = rand.nextInt(13);
 			count++;
-		} while ((resultArr[currX][currY] == 0) && (count <= 169));	
+		} while ((resultArr[currX][currY] == 0) && (count <= 169));	//ny siffra?
 		
 		String	ret = currX.toString() + " * " + currY.toString();
 		return ret;

@@ -105,7 +105,7 @@ public class DivGame implements GameInterface{
 			currX = rand.nextInt(13);
 			currY = rand.nextInt(13);
 			count++;
-		} while ((resultArr[currX][currY] == 0) && (count <= 169));	
+		} while ((resultArr[currX][currY] == 0) && (count <= 169));	//ny siffra?
 		
 		Integer prod = currX * currY;
 		String ret = prod.toString() + " / " + currX.toString();
