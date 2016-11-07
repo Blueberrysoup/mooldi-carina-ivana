@@ -66,7 +66,7 @@ public class MultiGameTest {
 			LOG.info("Testing the checkAnswer method with currX = " + x + ", currY = " + y + " and answer = " + answer);
 			assertTrue(multiGame.checkAnswer(answer));
 
-			LOG.info("Testing the checkAnswer method and resultArray entry has not changed since answer was incorrect");
+			LOG.info("Testing the checkAnswer method and resultArray entry has changed since answer was correct");
 			valueAfter = res[x][y];
 			assertTrue(valueBefore != valueAfter);
 		}

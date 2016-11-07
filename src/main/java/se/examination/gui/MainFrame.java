@@ -39,7 +39,7 @@ public class MainFrame implements ActionListener{
 	//Common
 	private FileHandler fileHandler = new FileHandler();
 	private Player player = new Player();
-	private char gameType;
+	private char gameType;					//'m' = multiplikation, 'd' = division
 
 	//MultiPage
 	private JPanel multiPage = new JPanel();	
