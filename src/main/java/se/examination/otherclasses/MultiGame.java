@@ -93,7 +93,6 @@ public class MultiGame implements GameInterface{
 			currX = rand.nextInt(13);
 			currY = rand.nextInt(13);
 		} while (resultArr[currX][currY] == 0);	
-		
 		String ret = currX.toString() + " * " + currY.toString();
 		return ret;
 	}

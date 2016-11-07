@@ -1,9 +1,11 @@
 package se.examination.otherclasses;
 
-import static org.junit.Assert.*;
-import java.util.logging.Logger;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import java.util.Random;
+import java.util.logging.Logger;
 
 import org.junit.Test;
 
@@ -37,8 +39,9 @@ public class MultiGameTest {
 		assertEquals(10, res[12][12]);
 	}
 
-	@Test (expected = java.lang.ArrayIndexOutOfBoundsException.class)
+	@Test (expected = ArrayIndexOutOfBoundsException.class)
 	public void testGetResultArr_OutOfBounds() {
+		System.out.println("test började");
 		multiGame.newMultArray();
 		int[][] res = multiGame.getResultArr();
 		LOG.info("Testing the getResultArr method with ArrayIndexOutOfBounds");

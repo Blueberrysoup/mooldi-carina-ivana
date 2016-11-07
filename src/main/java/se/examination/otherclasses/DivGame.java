@@ -105,8 +105,7 @@ public class DivGame implements GameInterface{
 			currY = rand.nextInt(13);
 		} while (resultArr[currX][currY] == 0);	
 		
-		Integer prod = currX * currY;
-		
+		Integer prod = currX * currY;		
 		String ret = prod.toString() + " / " + currX.toString();		
 		return ret;
 	}
