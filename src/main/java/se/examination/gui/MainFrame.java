@@ -10,6 +10,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Random;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -52,7 +53,7 @@ public class MainFrame implements ActionListener{
 	private JTextField textFieldSvar;
 	private JButton btnSluta;
 	private JButton btnOKnext;
-	private final int MAX_MULTI = 5; //679;  	
+	private final int MAX_MULTI = 679;  	
 	
 	//DivPage
 	private JPanel divPage = new JPanel();
@@ -66,13 +67,14 @@ public class MainFrame implements ActionListener{
 	private JTextField textFieldSvarDivision;
 	private JButton btnSlutaDivision;
 	private JButton btnOKnextDivision;
-	private final int MAX_DIV = 5; //583;
+	private final int MAX_DIV = 583;
 
 	//Congratulation page
 	private JPanel congratsPage = new JPanel();
 	private JLabel lblGrattis = new JLabel("");
 	private JLabel lblDuHarKlarat = new JLabel("");
 	private JButton btnClose = new JButton("Stäng");
+	private Timer timerCongrats = new Timer(250,null);
 
 
 	/**
@@ -357,6 +359,7 @@ public class MainFrame implements ActionListener{
 				lblDuHarKlarat.setText("Du har klarat hela multiplikationstabellen!");
 				multiPage.setVisible(false);
 				congratsPage.setVisible(true);
+				timerCongrats.start();
 			}
 		}
 		else if (gameType == 'd'){
@@ -375,6 +378,7 @@ public class MainFrame implements ActionListener{
 				lblDuHarKlarat.setText("Du har klarat hela divisionstabellen!");
 				divPage.setVisible(false);
 				congratsPage.setVisible(true);
+				timerCongrats.start();
 			}
 		}
 	}
@@ -457,6 +461,8 @@ public class MainFrame implements ActionListener{
 		
 		//CongratsPage
 		btnClose.addActionListener(this);
+		timerCongrats.addActionListener(this);
+		
 	}
 
 	/**
@@ -499,6 +505,10 @@ public class MainFrame implements ActionListener{
 		//CongratsPage
 		if (e.getSource() == btnClose)  {
 			saveGame();			
+		}
+		if (e.getSource() == timerCongrats){
+			Random r = new Random();
+			lblGrattis.setForeground(new Color(r.nextInt(256),r.nextInt(256),r.nextInt(256),r.nextInt(256)));
 		}
 		
 	}
