@@ -43,22 +43,13 @@ public class DivGameTest {
 		assertEquals(10, res[12][12]);
 	}
 
-	@Test (expected = java.lang.ArrayIndexOutOfBoundsException.class)
-	public void testGetResultArr_OutOfBounds() {
-		divGame.newDivArray();
-		int[][] res = divGame.getResultArr();
-		LOG.info("Testing the getResultArr method with ArrayIndexOutOfBounds");
-		assertEquals(2, res[13][13]);
-	}
-	
 	@Test
 	public void testRunGame() {
+		divGame.newDivArray();
 		String actual = divGame.runGame();
 		String expected = Integer.toString(divGame.getCurrX()*divGame.getCurrY()) + " / " + Integer.toString(divGame.getCurrX());
 		LOG.info("Testing the runGame method with currX = " + divGame.getCurrX() + ", currY = " + divGame.getCurrY() + " and actual = " + actual);
-		assertEquals(expected, actual);
-		
-		
+		assertEquals(expected, actual);		
 	}
 	
 	@Test
@@ -68,7 +59,7 @@ public class DivGameTest {
 		int answer = 0;
 		int[][] res = divGame.getResultArr();
 		int valueBefore = 0;
-//		int valueAfter = 0;
+		int valueAfter = 0;
 		for (int i = 0; i < 10; i++){
 			x = rand.nextInt(13);
 			y = rand.nextInt(13);
@@ -79,12 +70,9 @@ public class DivGameTest {
 			LOG.info("Testing the checkAnswer method with currX = " + x + ", currY = " + y + " and answer = " + answer);
 			assertTrue(divGame.checkAnswer(answer));
 			
-	//		LOG.info("Testing the checkAnswer method and resultArray entry has decreased since answer was correct");
-	//		valueAfter = res[x][y];
-	//		assertTrue(valueBefore == (valueAfter+1));
-		
-			LOG.info("Testing the checkAnswer method with currX = " + x + ", currY = " + y + " and wrong answer = " + (answer-5));
-			assertFalse(divGame.checkAnswer(answer-5));
+			LOG.info("Testing the checkAnswer method and resultArray entry has not changed since answer was incorrect");
+			valueAfter = res[x][y];
+			assertTrue(valueBefore != valueAfter);
 		}
 	}
 
@@ -95,7 +83,7 @@ public class DivGameTest {
 		int answer = 0;
 		int[][] res = divGame.getResultArr();
 		int valueBefore = 0;
-//		int valueAfter = 0;
+		int valueAfter = 0;
 		for (int i = 0; i < 10; i++){
 			x = rand.nextInt(13);
 			y = rand.nextInt(13);
@@ -106,9 +94,9 @@ public class DivGameTest {
 			LOG.info("Testing the checkAnswer method with currX = " + x + ", currY = " + y + " and answer = " + answer);
 			assertFalse(divGame.checkAnswer(answer));
 
-		//	LOG.info("Testing the checkAnswer method and resultArray entry has not changed since answer was incorrect");
-		//	valueAfter = res[x][y];
-		//	assertTrue(valueBefore == valueAfter);
+			LOG.info("Testing the checkAnswer method and resultArray entry has not changed since answer was incorrect");
+			valueAfter = res[x][y];
+			assertTrue(valueBefore == valueAfter);
 		}
 	}
 

@@ -38,18 +38,10 @@ public class MultiGameTest {
 		LOG.info("Testing the newMultArry and getResultArr methods with x=12 and y=12");
 		assertEquals(10, res[12][12]);
 	}
-
-	@Test (expected = ArrayIndexOutOfBoundsException.class)
-	public void testGetResultArr_OutOfBounds() {
-		System.out.println("test började");
-		multiGame.newMultArray();
-		int[][] res = multiGame.getResultArr();
-		LOG.info("Testing the getResultArr method with ArrayIndexOutOfBounds");
-		assertEquals(2, res[13][13]);
-	}
 	
 	@Test
 	public void testRunGame() {
+		multiGame.newMultArray();
 		String actual = multiGame.runGame();
 		String expected = Integer.toString(multiGame.getCurrX()) + " * " + Integer.toString(multiGame.getCurrY());
 		LOG.info("Testing the runGame method with currX = " + multiGame.getCurrX() + ", currY = " + multiGame.getCurrY() + " and actual = " + actual);
@@ -73,10 +65,10 @@ public class MultiGameTest {
 			valueBefore = res[x][y];
 			LOG.info("Testing the checkAnswer method with currX = " + x + ", currY = " + y + " and answer = " + answer);
 			assertTrue(multiGame.checkAnswer(answer));
-			
-			LOG.info("Testing the checkAnswer method and resultArray entry has decreased since answer was correct");
+
+			LOG.info("Testing the checkAnswer method and resultArray entry has not changed since answer was incorrect");
 			valueAfter = res[x][y];
-			assertTrue(valueBefore == (valueAfter+1));
+			assertTrue(valueBefore != valueAfter);
 		}
 }
 

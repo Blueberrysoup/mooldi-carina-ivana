@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results skipped="0" failed="0" total="17" passed="17">
+  <reporter-output>
+  </reporter-output>
+  <suite name="Surefire suite" duration-ms="352" started-at="2016-11-07T11:53:34Z" finished-at="2016-11-07T11:53:34Z">
+    <groups>
+    </groups>
+    <test name="Surefire test" duration-ms="352" started-at="2016-11-07T11:53:34Z" finished-at="2016-11-07T11:53:34Z">
+      <class name="se.examination.otherclasses.PlayerTest">
+        <test-method status="PASS" signature="testSetAndGetPoints()[pri:0, instance:testSetAndGetPoints(se.examination.otherclasses.PlayerTest)]" name="testSetAndGetPoints" duration-ms="1" started-at="2016-11-07T12:53:34Z" finished-at="2016-11-07T12:53:34Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testSetAndGetPoints -->
+        <test-method status="PASS" signature="testSetAndGetCompleted()[pri:0, instance:testSetAndGetCompleted(se.examination.otherclasses.PlayerTest)]" name="testSetAndGetCompleted" duration-ms="1" started-at="2016-11-07T12:53:34Z" finished-at="2016-11-07T12:53:34Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testSetAndGetCompleted -->
+        <test-method status="PASS" signature="testIncreasePoints()[pri:0, instance:testIncreasePoints(se.examination.otherclasses.PlayerTest)]" name="testIncreasePoints" duration-ms="1" started-at="2016-11-07T12:53:34Z" finished-at="2016-11-07T12:53:34Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testIncreasePoints -->
+        <test-method status="PASS" signature="testSetAndGetName()[pri:0, instance:testSetAndGetName(se.examination.otherclasses.PlayerTest)]" name="testSetAndGetName" duration-ms="0" started-at="2016-11-07T12:53:34Z" finished-at="2016-11-07T12:53:34Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testSetAndGetName -->
+        <test-method status="PASS" signature="testIncreaseCompleted()[pri:0, instance:testIncreaseCompleted(se.examination.otherclasses.PlayerTest)]" name="testIncreaseCompleted" duration-ms="0" started-at="2016-11-07T12:53:34Z" finished-at="2016-11-07T12:53:34Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testIncreaseCompleted -->
+      </class> <!-- se.examination.otherclasses.PlayerTest -->
+      <class name="se.examination.otherclasses.DivGameTest">
+        <test-method status="PASS" signature="testCheckAnswer_false()[pri:0, instance:testCheckAnswer_false(se.examination.otherclasses.DivGameTest)]" name="testCheckAnswer_false" duration-ms="24" started-at="2016-11-07T12:53:34Z" finished-at="2016-11-07T12:53:34Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testCheckAnswer_false -->
+        <test-method status="PASS" signature="testIsCleared_false()[pri:0, instance:testIsCleared_false(se.examination.otherclasses.DivGameTest)]" name="testIsCleared_false" duration-ms="7" started-at="2016-11-07T12:53:34Z" finished-at="2016-11-07T12:53:34Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testIsCleared_false -->
+        <test-method status="PASS" signature="testIsCleared_true()[pri:0, instance:testIsCleared_true(se.examination.otherclasses.DivGameTest)]" name="testIsCleared_true" duration-ms="9" started-at="2016-11-07T12:53:34Z" finished-at="2016-11-07T12:53:34Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testIsCleared_true -->
+        <test-method status="PASS" signature="testRunGame()[pri:0, instance:testRunGame(se.examination.otherclasses.DivGameTest)]" name="testRunGame" duration-ms="1" started-at="2016-11-07T12:53:34Z" finished-at="2016-11-07T12:53:34Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testRunGame -->
+        <test-method status="PASS" signature="testNewDivArray_getResultArr()[pri:0, instance:testNewDivArray_getResultArr(se.examination.otherclasses.DivGameTest)]" name="testNewDivArray_getResultArr" duration-ms="9" started-at="2016-11-07T12:53:34Z" finished-at="2016-11-07T12:53:34Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testNewDivArray_getResultArr -->
+        <test-method status="PASS" signature="testCheckAnswer_true()[pri:0, instance:testCheckAnswer_true(se.examination.otherclasses.DivGameTest)]" name="testCheckAnswer_true" duration-ms="13" started-at="2016-11-07T12:53:34Z" finished-at="2016-11-07T12:53:34Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testCheckAnswer_true -->
+      </class> <!-- se.examination.otherclasses.DivGameTest -->
+      <class name="se.examination.otherclasses.FileHandlerTest">
+        <test-method status="PASS" signature="testSaveDivGameToFile()[pri:0, instance:testSaveDivGameToFile(se.examination.otherclasses.FileHandlerTest)]" name="testSaveDivGameToFile" duration-ms="6" started-at="2016-11-07T12:53:34Z" finished-at="2016-11-07T12:53:34Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testSaveDivGameToFile -->
+      </class> <!-- se.examination.otherclasses.FileHandlerTest -->
+      <class name="se.examination.otherclasses.MultiGameTest">
+        <test-method status="PASS" signature="testCheckAnswer_false()[pri:0, instance:testCheckAnswer_false(se.examination.otherclasses.MultiGameTest)]" name="testCheckAnswer_false" duration-ms="11" started-at="2016-11-07T12:53:34Z" finished-at="2016-11-07T12:53:34Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testCheckAnswer_false -->
+        <test-method status="PASS" signature="testNewMultArray_getResultArr()[pri:0, instance:testNewMultArray_getResultArr(se.examination.otherclasses.MultiGameTest)]" name="testNewMultArray_getResultArr" duration-ms="6" started-at="2016-11-07T12:53:34Z" finished-at="2016-11-07T12:53:34Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testNewMultArray_getResultArr -->
+        <test-method status="PASS" signature="testIsCleared()[pri:0, instance:testIsCleared(se.examination.otherclasses.MultiGameTest)]" name="testIsCleared" duration-ms="7" started-at="2016-11-07T12:53:34Z" finished-at="2016-11-07T12:53:34Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testIsCleared -->
+        <test-method status="PASS" signature="testRunGame()[pri:0, instance:testRunGame(se.examination.otherclasses.MultiGameTest)]" name="testRunGame" duration-ms="1" started-at="2016-11-07T12:53:34Z" finished-at="2016-11-07T12:53:34Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testRunGame -->
+        <test-method status="PASS" signature="testCheckAnswer_true()[pri:0, instance:testCheckAnswer_true(se.examination.otherclasses.MultiGameTest)]" name="testCheckAnswer_true" duration-ms="27" started-at="2016-11-07T12:53:34Z" finished-at="2016-11-07T12:53:34Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testCheckAnswer_true -->
+      </class> <!-- se.examination.otherclasses.MultiGameTest -->
+    </test> <!-- Surefire test -->
+  </suite> <!-- Surefire suite -->
+</testng-results>

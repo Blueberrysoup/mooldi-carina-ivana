@@ -1,0 +1,459 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="sv"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>MainFrame.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">mooldi-carina-ivana</a> &gt; <a href="index.source.html" class="el_package">se.examination.gui</a> &gt; <span class="el_source">MainFrame.java</span></div><h1>MainFrame.java</h1><pre class="source lang-java linenums">/***
+* MainFrame - GUI for Main Frame - Mooldi application
+* @authors: Carina Ekström, Ivana Zdjuic
+* @version: 1.0
+**/
+package se.examination.gui;
+
+import java.awt.CardLayout;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JLayeredPane;
+import javax.swing.JPanel;
+import javax.swing.JProgressBar;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+import javax.swing.Timer;
+
+import se.examination.otherclasses.DivGame;
+import se.examination.otherclasses.FileHandler;
+import se.examination.otherclasses.MultiGame;
+import se.examination.otherclasses.Player;
+
+public class MainFrame implements ActionListener{
+
+	//MainFrame and StartPage
+	private JFrame frmMooldi;
+<span class="nc" id="L33">	private JPanel startPage = new JPanel();</span>
+	private JTextField textFieldName;
+	private JButton btnMulti;
+	private JButton btnDivision;
+	
+	//Common
+<span class="nc" id="L39">	private FileHandler fileHandler = new FileHandler();</span>
+<span class="nc" id="L40">	private Player player = new Player();</span>
+
+	//MultiPage
+<span class="nc" id="L43">	private JPanel multiPage = new JPanel();	</span>
+<span class="nc" id="L44">	private MultiGame game = new MultiGame();</span>
+<span class="nc" id="L45">	private Timer timer = new Timer(10000,null);</span>
+	private JProgressBar progressBar;
+	private JLabel lblHejNamn;
+	private JLabel lblXTalet;
+	private JLabel lblCompleted;
+	private JLabel lblResultError;
+	private JTextField textFieldSvar;
+	private JButton btnSluta;
+	private JButton btnOKnext;
+<span class="nc" id="L54">	private final int MAX_MULTI = 679;  	//TODO hitta metoden som summerar element i matrisen</span>
+	
+	//DivPage
+<span class="nc" id="L57">	private JPanel divPage = new JPanel();</span>
+<span class="nc" id="L58">	private DivGame gameDivision= new DivGame();</span>
+<span class="nc" id="L59">	private Timer timerDiv = new Timer(15000,null);</span>
+	private JProgressBar progressBarDivision;
+	private JLabel lblHejNamnDivision;
+	private JLabel lblXTaletDivision;
+	private JLabel lblCompletedDivision;
+	private JLabel lblResultErrorDivision;
+	private JTextField textFieldSvarDivision;
+	private JButton btnSlutaDivision;
+	private JButton btnOKnextDivision;
+<span class="nc" id="L68">	private final int MAX_DIV = 583;</span>
+
+
+	/**
+	 * Constructor - create the application.
+	 */
+<span class="nc" id="L74">	public MainFrame() {</span>
+<span class="nc" id="L75">		createGUI();</span>
+<span class="nc" id="L76">		addActionListeners();</span>
+<span class="nc" id="L77">	}</span>
+
+	/**
+	 * Get Mooldi frame
+	 * @return frmMooldi Main frame for Mooldi application
+	 */
+	public JFrame getFrmMooldi(){
+<span class="nc" id="L84">		return frmMooldi;</span>
+	}
+	
+
+	/**
+	 * Initialize the contents of the main frame.
+	 */
+	private void createGUI() {
+		//Create MainFrame
+<span class="nc" id="L93">		frmMooldi = new JFrame();</span>
+<span class="nc" id="L94">		frmMooldi.setTitle(&quot;MOOLDI&quot;);</span>
+<span class="nc" id="L95">		frmMooldi.setBounds(100, 100, 750, 600);</span>
+<span class="nc" id="L96">		frmMooldi.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);</span>
+<span class="nc" id="L97">		frmMooldi.getContentPane().setLayout(new CardLayout(0, 0));</span>
+		
+		//Create pages
+<span class="nc" id="L100">		startPage.setBackground(new Color(0, 255, 255));</span>
+<span class="nc" id="L101">		frmMooldi.getContentPane().add(startPage, &quot;name_23428416361482&quot;);</span>
+<span class="nc" id="L102">		startPage.setLayout(null);</span>
+		
+<span class="nc" id="L104">		multiPage.setBackground(Color.BLUE);</span>
+<span class="nc" id="L105">		frmMooldi.getContentPane().add(multiPage, &quot;name_23490729527832&quot;);</span>
+<span class="nc" id="L106">		multiPage.setLayout(null);</span>
+		
+<span class="nc" id="L108">		divPage.setBackground(Color.PINK);</span>
+<span class="nc" id="L109">		frmMooldi.getContentPane().add(divPage, &quot;name_271421026775&quot;);</span>
+<span class="nc" id="L110">		divPage.setLayout(null);</span>
+		
+		//Add components to pages
+<span class="nc" id="L113">		createStartPageGUI();</span>
+<span class="nc" id="L114">		createMultiPageGUI();</span>
+<span class="nc" id="L115">		createDivPageGUI();</span>
+		
+<span class="nc" id="L117">	}</span>
+
+	/**
+	 * Initialize the contents of start page.
+	 */
+	public void createStartPageGUI(){
+		//Labels and text fields
+<span class="nc" id="L124">		JLabel lblVlkommenTill = new JLabel(&quot;Välkommen till&quot;);</span>
+<span class="nc" id="L125">		lblVlkommenTill.setBounds(325, 91, 103, 15);</span>
+<span class="nc" id="L126">		startPage.add(lblVlkommenTill);</span>
+		
+<span class="nc" id="L128">		JLabel lblMooldi = new JLabel(&quot;MOOLDI&quot;);</span>
+<span class="nc" id="L129">		lblMooldi.setFont(new Font(&quot;Century Schoolbook L&quot;, Font.BOLD, 60));</span>
+<span class="nc" id="L130">		lblMooldi.setBounds(239, 105, 355, 62);</span>
+<span class="nc" id="L131">		startPage.add(lblMooldi);</span>
+		
+<span class="nc" id="L133">		JLabel lblSkrivDittNamn = new JLabel(&quot;Skriv ditt namn:&quot;);</span>
+<span class="nc" id="L134">		lblSkrivDittNamn.setBounds(247, 243, 128, 15);</span>
+<span class="nc" id="L135">		startPage.add(lblSkrivDittNamn);</span>
+		
+<span class="nc" id="L137">		textFieldName = new JTextField();</span>
+<span class="nc" id="L138">		textFieldName.setBounds(379, 241, 114, 19);</span>
+<span class="nc" id="L139">		startPage.add(textFieldName);</span>
+<span class="nc" id="L140">		textFieldName.setColumns(10);</span>
+		
+<span class="nc" id="L142">		JLabel lblVljVadDu = new JLabel(&quot;Välj vad du vill träna på:&quot;);</span>
+<span class="nc" id="L143">		lblVljVadDu.setBounds(287, 363, 209, 15);</span>
+<span class="nc" id="L144">		startPage.add(lblVljVadDu);</span>
+
+		//Buttons
+<span class="nc" id="L147">		btnMulti = new JButton(&quot;Multiplikation&quot;);</span>
+<span class="nc" id="L148">		btnMulti.setBounds(192, 397, 143, 25);</span>
+<span class="nc" id="L149">		startPage.add(btnMulti);</span>
+		
+<span class="nc" id="L151">		btnDivision = new JButton(&quot;Division&quot;);</span>
+<span class="nc" id="L152">		btnDivision.setBounds(404, 397, 143, 25);</span>
+<span class="nc" id="L153">		startPage.add(btnDivision);</span>
+<span class="nc" id="L154">	}</span>
+
+	/**
+	 * Initialize the contents of multiplication page.
+	 */
+	public void createMultiPageGUI(){
+<span class="nc" id="L160">		JLayeredPane layeredPane = new JLayeredPane();</span>
+<span class="nc" id="L161">		layeredPane.setBounds(0, 0, 1, 1);</span>
+<span class="nc" id="L162">		multiPage.add(layeredPane);</span>
+
+		//Labels and text fields
+<span class="nc" id="L165">		lblHejNamn = new JLabel();</span>
+<span class="nc" id="L166">		lblHejNamn.setForeground(Color.LIGHT_GRAY);</span>
+<span class="nc" id="L167">		lblHejNamn.setFont(new Font(&quot;Dialog&quot;, Font.PLAIN, 55));</span>
+<span class="nc" id="L168">		lblHejNamn.setBounds(41, 43, 633, 79);</span>
+<span class="nc" id="L169">		multiPage.add(lblHejNamn);</span>
+		
+<span class="nc" id="L171">		lblCompleted = new JLabel(&quot;&quot;);</span>
+<span class="nc" id="L172">		lblCompleted.setBounds(70, 410, 500, 15);</span>
+<span class="nc" id="L173">		multiPage.add(lblCompleted);</span>
+
+<span class="nc" id="L175">		lblXTalet = new JLabel();</span>
+<span class="nc" id="L176">		lblXTalet.setHorizontalAlignment(SwingConstants.CENTER);</span>
+<span class="nc" id="L177">		lblXTalet.setFont(new Font(&quot;Dialog&quot;, Font.BOLD, 32));</span>
+<span class="nc" id="L178">		lblXTalet.setBounds(270, 168, 200, 79);</span>
+<span class="nc" id="L179">		multiPage.add(lblXTalet);</span>
+		
+<span class="nc" id="L181">		textFieldSvar = new JTextField();</span>
+<span class="nc" id="L182">		textFieldSvar.setBounds(301, 256, 138, 36);</span>
+<span class="nc" id="L183">		textFieldSvar.setColumns(10);</span>
+<span class="nc" id="L184">		textFieldSvar.requestFocusInWindow();</span>
+<span class="nc" id="L185">		multiPage.add(textFieldSvar);</span>
+				
+<span class="nc" id="L187">		lblResultError = new JLabel(&quot;Tyvärr var det fel svar - försök igen!&quot;);</span>
+<span class="nc" id="L188">		lblResultError.setFont(new Font(&quot;Dialog&quot;, Font.BOLD | Font.ITALIC, 18));</span>
+<span class="nc" id="L189">		lblResultError.setForeground(Color.RED);</span>
+<span class="nc" id="L190">		lblResultError.setHorizontalAlignment(SwingConstants.CENTER);</span>
+<span class="nc" id="L191">		lblResultError.setBounds(122, 295, 509, 34);</span>
+<span class="nc" id="L192">		multiPage.add(lblResultError);</span>
+
+		//Buttons
+<span class="nc" id="L195">		btnSluta = new JButton(&quot;Sluta spela och spara poängen&quot;);</span>
+<span class="nc" id="L196">		btnSluta.setBounds(419, 440, 255, 25);</span>
+<span class="nc" id="L197">		multiPage.add(btnSluta);</span>
+		
+<span class="nc" id="L199">		btnOKnext = new JButton(&quot;OK&quot;);</span>
+<span class="nc" id="L200">		btnOKnext.setBounds(468, 261, 117, 25);</span>
+<span class="nc" id="L201">		multiPage.add(btnOKnext);</span>
+		
+		//Progressbar
+<span class="nc" id="L204">		progressBar = new JProgressBar();</span>
+<span class="nc" id="L205">		progressBar.setMaximum(MAX_MULTI);				</span>
+<span class="nc" id="L206">		progressBar.setBounds(70, 437, 200, 14);</span>
+<span class="nc" id="L207">		multiPage.add(progressBar);	</span>
+<span class="nc" id="L208">	}</span>
+	
+	/**
+	 * Initialize the contents of division page.
+	 */
+	public void createDivPageGUI(){
+<span class="nc" id="L214">		JLayeredPane layeredPaneDivision = new JLayeredPane();</span>
+<span class="nc" id="L215">		layeredPaneDivision.setBounds(0, 0, 1, 1);</span>
+<span class="nc" id="L216">		divPage.add(layeredPaneDivision);</span>
+		
+		//Labels and text fields
+<span class="nc" id="L219">		lblHejNamnDivision = new JLabel();</span>
+<span class="nc" id="L220">		lblHejNamnDivision.setForeground(Color.DARK_GRAY);</span>
+<span class="nc" id="L221">		lblHejNamnDivision.setFont(new Font(&quot;Dialog&quot;, Font.PLAIN, 55));</span>
+<span class="nc" id="L222">		lblHejNamnDivision.setBounds(41, 43, 633, 79);</span>
+<span class="nc" id="L223">		divPage.add(lblHejNamnDivision);</span>
+		
+<span class="nc" id="L225">		lblCompletedDivision = new JLabel(&quot;&quot;);</span>
+<span class="nc" id="L226">		lblCompletedDivision.setBounds(70, 410, 500, 15);</span>
+<span class="nc" id="L227">		divPage.add(lblCompletedDivision);</span>
+
+<span class="nc" id="L229">		lblXTaletDivision = new JLabel();</span>
+<span class="nc" id="L230">		lblXTaletDivision.setHorizontalAlignment(SwingConstants.CENTER);</span>
+<span class="nc" id="L231">		lblXTaletDivision.setFont(new Font(&quot;Dialog&quot;, Font.BOLD, 32));</span>
+<span class="nc" id="L232">		lblXTaletDivision.setBounds(270, 168, 200, 79);</span>
+<span class="nc" id="L233">		divPage.add(lblXTaletDivision);</span>
+		
+<span class="nc" id="L235">		textFieldSvarDivision = new JTextField();</span>
+<span class="nc" id="L236">		textFieldSvarDivision.setBounds(301, 256, 138, 36);</span>
+<span class="nc" id="L237">		textFieldSvarDivision.setColumns(10);</span>
+<span class="nc" id="L238">		textFieldSvarDivision.requestFocusInWindow();</span>
+<span class="nc" id="L239">		divPage.add(textFieldSvarDivision);</span>
+				
+<span class="nc" id="L241">		lblResultErrorDivision = new JLabel(&quot;Tyvärr var det fel svar - försök igen!&quot;);</span>
+<span class="nc" id="L242">		lblResultErrorDivision.setFont(new Font(&quot;Dialog&quot;, Font.BOLD | Font.ITALIC, 18));</span>
+<span class="nc" id="L243">		lblResultErrorDivision.setForeground(Color.RED);</span>
+<span class="nc" id="L244">		lblResultErrorDivision.setHorizontalAlignment(SwingConstants.CENTER);</span>
+<span class="nc" id="L245">		lblResultErrorDivision.setBounds(122, 295, 509, 34);</span>
+<span class="nc" id="L246">		divPage.add(lblResultErrorDivision);</span>
+
+		//Buttons
+<span class="nc" id="L249">		btnSlutaDivision = new JButton(&quot;Sluta spela och spara poängen&quot;);</span>
+<span class="nc" id="L250">		btnSlutaDivision.setBounds(419, 440, 255, 25);</span>
+<span class="nc" id="L251">		divPage.add(btnSlutaDivision);</span>
+		
+<span class="nc" id="L253">		btnOKnextDivision = new JButton(&quot;OK&quot;);</span>
+<span class="nc" id="L254">		btnOKnextDivision.setBounds(468, 261, 117, 25);</span>
+<span class="nc" id="L255">		divPage.add(btnOKnextDivision);</span>
+		
+		//Progressbar
+<span class="nc" id="L258">		progressBarDivision = new JProgressBar();</span>
+<span class="nc" id="L259">		progressBarDivision.setMaximum(MAX_DIV);</span>
+<span class="nc" id="L260">		progressBarDivision.setBounds(70, 437, 200, 14);</span>
+<span class="nc" id="L261">		divPage.add(progressBarDivision);</span>
+		
+<span class="nc" id="L263">	}</span>
+
+	/**
+	 * Initiate game when user selects to play Multiplication. 
+	 * Open saved file if the user has played before, otherwise create a new game structure. 
+	 * Show multiplication page with data from the saved file (if it exists).
+	 */
+	public void onClickMulti(){
+<span class="nc" id="L271">		player.setName(textFieldName.getText());</span>
+		
+<span class="nc bnc" id="L273" title="All 2 branches missed.">		if (!fileHandler.startMultiGame(player, game)) 			//if this user not already has an ongoing game			</span>
+<span class="nc" id="L274">			game.newMultArray();</span>
+		
+<span class="nc" id="L276">		lblHejNamn.setText(&quot;Hej &quot; + textFieldName.getText() + &quot;!&quot;);</span>
+<span class="nc" id="L277">		lblCompleted.setText(&quot;Du har klarat av totalt &quot; + player.getPoints() + &quot; av &quot; + MAX_MULTI + &quot; tal.&quot;);</span>
+	
+<span class="nc" id="L279">		startPage.setVisible(false);</span>
+<span class="nc" id="L280">		multiPage.setVisible(true);</span>
+
+<span class="nc" id="L282">		runGame(&quot;Multi&quot;);</span>
+<span class="nc" id="L283">	}</span>
+	
+	/**
+	 * Initiate game when user selects to play Division. 
+	 * Open saved file if the user has played before, otherwise create a new game structure. 
+	 * Show division page with data from the saved file (if it exists).
+	 */
+	public void onClickDivision(){
+<span class="nc" id="L291">		player.setName(textFieldName.getText());</span>
+		
+<span class="nc bnc" id="L293" title="All 2 branches missed.">		if (!fileHandler.startDivGame(player, gameDivision)) 	//if this user not already has an ongoing game			</span>
+<span class="nc" id="L294">			gameDivision.newDivArray();</span>
+		
+<span class="nc" id="L296">		lblHejNamnDivision.setText(&quot;Hej &quot; + textFieldName.getText() + &quot;!&quot;);</span>
+<span class="nc" id="L297">		lblCompletedDivision.setText(&quot;Du har klarat av totalt &quot; + player.getPoints() + &quot; av &quot; + MAX_DIV + &quot; tal.&quot;);</span>
+		
+<span class="nc" id="L299">		startPage.setVisible(false);</span>
+<span class="nc" id="L300">		divPage.setVisible(true);</span>
+		
+<span class="nc" id="L302">		runGame(&quot;Div&quot;);</span>
+<span class="nc" id="L303">	}</span>
+
+
+	/**
+	 * Initiate a new game round by cleaning up the page, get a new random number to calculate and start the timer. 
+	 * @param type Either &quot;Multi&quot; or &quot;Div&quot;
+	 */
+	public void runGame(String type){
+<span class="nc bnc" id="L311" title="All 2 branches missed.">		if (type == &quot;Multi&quot;){</span>
+<span class="nc bnc" id="L312" title="All 4 branches missed.">			if ((player.getPoints() &lt; MAX_MULTI) &amp;&amp; (player.getCompleted() &lt; 169)){</span>
+<span class="nc" id="L313">				lblResultError.setVisible(false);</span>
+<span class="nc" id="L314">				progressBar.setValue(player.getPoints());</span>
+<span class="nc" id="L315">				textFieldSvar.setText(&quot;&quot;);</span>
+<span class="nc" id="L316">				lblXTalet.setText(game.runGame());</span>
+<span class="nc bnc" id="L317" title="All 2 branches missed.">				if (!timer.isRunning())</span>
+<span class="nc" id="L318">					timer.start();</span>
+				else
+<span class="nc" id="L320">					timer.restart(); </span>
+			}
+			else {
+				//TODO: GAME OVER!
+			}
+		}
+<span class="nc bnc" id="L326" title="All 2 branches missed.">		else if (type == &quot;Div&quot;){</span>
+<span class="nc bnc" id="L327" title="All 4 branches missed.">			if ((player.getPoints() &lt; MAX_DIV) &amp;&amp; (player.getCompleted() &lt; 169)){</span>
+<span class="nc" id="L328">				lblResultErrorDivision.setVisible(false);</span>
+<span class="nc" id="L329">				progressBarDivision.setValue(player.getPoints());</span>
+<span class="nc" id="L330">				textFieldSvarDivision.setText(&quot;&quot;);</span>
+<span class="nc" id="L331">				lblXTaletDivision.setText(gameDivision.runGame());</span>
+<span class="nc bnc" id="L332" title="All 2 branches missed.">				if (!timerDiv.isRunning())</span>
+<span class="nc" id="L333">					timerDiv.start();</span>
+				else
+<span class="nc" id="L335">					timerDiv.restart(); </span>
+			}
+			else {
+				//TODO: GAME OVER!
+			}
+		}
+<span class="nc" id="L341">	}</span>
+		
+	/**
+	 * Check if answer is correct when user enters an answer and either press Enter or OK-button. 
+	 * If correct: update progressbar and run a new game round.
+	 * If wrong: show error message.
+	 * @param type Either &quot;Multi&quot; or &quot;Div&quot;
+	 */
+	public void onAnswering(String type){
+		try{
+<span class="nc bnc" id="L351" title="All 2 branches missed.">			if (type == &quot;Multi&quot;){</span>
+<span class="nc bnc" id="L352" title="All 2 branches missed.">				if (game.checkAnswer(Integer.parseInt(textFieldSvar.getText())) == true){</span>
+<span class="nc" id="L353">					player.increasePoints();</span>
+<span class="nc bnc" id="L354" title="All 2 branches missed.">					if (game.isCleared()){</span>
+<span class="nc" id="L355">						player.increaseCompleted();</span>
+					}	
+<span class="nc" id="L357">					lblCompleted.setText(&quot;Du har klarat av totalt &quot; + player.getPoints() + &quot; av &quot; + MAX_MULTI + &quot; tal.&quot;);</span>
+<span class="nc" id="L358">					progressBar.setValue(player.getPoints());</span>
+<span class="nc" id="L359">					runGame(&quot;Multi&quot;);</span>
+				} else {
+<span class="nc" id="L361">					textFieldSvar.setText(&quot;&quot;);</span>
+<span class="nc" id="L362">					lblResultError.setVisible(true);</span>
+				}
+			}
+<span class="nc bnc" id="L365" title="All 2 branches missed.">			else if (type == &quot;Div&quot;){</span>
+<span class="nc bnc" id="L366" title="All 2 branches missed.">				if (gameDivision.checkAnswer(Integer.parseInt(textFieldSvarDivision.getText())) == true){</span>
+<span class="nc" id="L367">					player.increasePoints();</span>
+<span class="nc bnc" id="L368" title="All 2 branches missed.">					if (gameDivision.isCleared()){</span>
+<span class="nc" id="L369">						player.increaseCompleted();</span>
+					}
+<span class="nc" id="L371">					lblCompletedDivision.setText(&quot;Du har klarat av totalt &quot; + player.getPoints() + &quot; av &quot; + MAX_DIV + &quot; tal.&quot;);</span>
+<span class="nc" id="L372">					progressBarDivision.setValue(player.getPoints());</span>
+					
+<span class="nc" id="L374">					runGame(&quot;Div&quot;);</span>
+				} else {
+<span class="nc" id="L376">					textFieldSvarDivision.setText(&quot;&quot;);</span>
+<span class="nc" id="L377">					lblResultErrorDivision.setVisible(true);</span>
+				}				
+			}
+<span class="nc" id="L380">		} catch (NumberFormatException e){</span>
+<span class="nc" id="L381">			e.getMessage();</span>
+<span class="nc" id="L382">		}</span>
+<span class="nc" id="L383">	}</span>
+	
+
+	/**
+	 * Save game - when user press Save-button
+	 * @param type Either &quot;Multi&quot; or &quot;Div&quot;
+	 */
+	public void saveGame(String type){
+<span class="nc bnc" id="L391" title="All 2 branches missed.">		if (type == &quot;Multi&quot;){</span>
+<span class="nc" id="L392">			fileHandler.saveMultiGameToFile(player, game);	</span>
+		}
+<span class="nc bnc" id="L394" title="All 2 branches missed.">		else if (type == &quot;Div&quot;){</span>
+<span class="nc" id="L395">			fileHandler.saveDivGameToFile(player, gameDivision);</span>
+		}
+<span class="nc" id="L397">		System.exit(0);</span>
+<span class="nc" id="L398">	}</span>
+	
+
+	/**
+	 * Action listeners
+	 */	
+	public void addActionListeners() {
+		//StartPage
+<span class="nc" id="L406">		btnMulti.addActionListener(this);	</span>
+<span class="nc" id="L407">		btnDivision.addActionListener(this);</span>
+		
+		//MultiPage
+<span class="nc" id="L410">		textFieldSvar.addActionListener(this);</span>
+<span class="nc" id="L411">		btnSluta.addActionListener(this);</span>
+<span class="nc" id="L412">		btnOKnext.addActionListener(this);</span>
+<span class="nc" id="L413">		timer.addActionListener(this);</span>
+		
+		//DivPage
+<span class="nc" id="L416">		textFieldSvarDivision.addActionListener(this);</span>
+<span class="nc" id="L417">		btnSlutaDivision.addActionListener(this);</span>
+<span class="nc" id="L418">		btnOKnextDivision.addActionListener(this);</span>
+<span class="nc" id="L419">		timerDiv.addActionListener(this);</span>
+<span class="nc" id="L420">	}</span>
+
+	/**
+	 * Action handlers
+	 */	
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		//StartPage
+<span class="nc bnc" id="L428" title="All 2 branches missed.">		if (e.getSource() == btnMulti) {</span>
+<span class="nc" id="L429">			onClickMulti();			</span>
+		}
+<span class="nc bnc" id="L431" title="All 2 branches missed.">		if (e.getSource() == btnDivision) {</span>
+<span class="nc" id="L432">			onClickDivision();			</span>
+		}
+		
+		//MultiPage
+<span class="nc bnc" id="L436" title="All 4 branches missed.">		if ((e.getSource() == textFieldSvar)||(e.getSource() == btnOKnext)) {</span>
+<span class="nc" id="L437">			onAnswering(&quot;Multi&quot;);			</span>
+		}
+<span class="nc bnc" id="L439" title="All 2 branches missed.">		if (e.getSource() == btnSluta)  {</span>
+<span class="nc" id="L440">			saveGame(&quot;Multi&quot;);			</span>
+		}
+<span class="nc bnc" id="L442" title="All 2 branches missed.">		if (e.getSource() == timer){</span>
+<span class="nc" id="L443">			runGame(&quot;Multi&quot;);</span>
+		}
+
+		//DivPage
+<span class="nc bnc" id="L447" title="All 4 branches missed.">		if ((e.getSource() == textFieldSvarDivision)||(e.getSource() == btnOKnextDivision)) {</span>
+<span class="nc" id="L448">			onAnswering(&quot;Div&quot;);			</span>
+		}
+<span class="nc bnc" id="L450" title="All 2 branches missed.">		if (e.getSource() == btnSlutaDivision) {</span>
+<span class="nc" id="L451">			saveGame(&quot;Div&quot;);</span>
+		}
+<span class="nc bnc" id="L453" title="All 2 branches missed.">		if (e.getSource() == timerDiv){</span>
+<span class="nc" id="L454">			runGame(&quot;Div&quot;);</span>
+		}
+		
+<span class="nc" id="L457">	}</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.7.201606060606</span></div></body></html>

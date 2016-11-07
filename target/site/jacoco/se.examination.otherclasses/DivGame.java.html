@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="sv"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>DivGame.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">mooldi-carina-ivana</a> &gt; <a href="index.source.html" class="el_package">se.examination.otherclasses</a> &gt; <span class="el_source">DivGame.java</span></div><h1>DivGame.java</h1><pre class="source lang-java linenums">/***
+* DivGame - Methods for Division Page - Mooldi application
+* @authors: Carina Ekström, Ivana Zdjuic
+* @version: 1.0
+**/
+package se.examination.otherclasses;
+
+import java.util.Random;
+
+import se.examination.interfaces.GameInterface;
+
+<span class="fc" id="L12">public class DivGame implements GameInterface{</span>
+	
+<span class="fc" id="L14">	private int[][] resultArr = new int[13][13];</span>
+<span class="fc" id="L15">	private final int NO_USE = 0;</span>
+<span class="fc" id="L16">	private final int EASY = 2;</span>
+<span class="fc" id="L17">	private final int MEDIUM = 5;	</span>
+<span class="fc" id="L18">	private final int HARD = 10;</span>
+<span class="fc" id="L19">	private Integer currX = 0;</span>
+<span class="fc" id="L20">	private Integer currY = 0;</span>
+	
+	/*
+	 * Getters and setters - only to be used for unit test purpose
+	 */	
+	public Integer getCurrX() {
+<span class="fc" id="L26">		return currX;</span>
+	}
+
+	public void setCurrX(Integer currX) {
+<span class="fc" id="L30">		this.currX = currX;</span>
+<span class="fc" id="L31">	}</span>
+
+	public Integer getCurrY() {
+<span class="fc" id="L34">		return currY;</span>
+	}
+
+	public void setCurrY(Integer currY) {
+<span class="fc" id="L38">		this.currY = currY;</span>
+<span class="fc" id="L39">	}</span>
+
+	/**
+	 * Initiates the resultArr for first time users.
+	 * Each entry tells how many times a number (e.g. 56/7) has to be answered correctly in order to say that it is cleared.
+	 * Easy numbers like 30/10 must not be answered as many times as harder numbers like 63/9. Division by 0 and 1 and not used at all.
+	 * 
+	 * The indices for each entry in the array corresponds to the number to calculate, e.g. resultArr[7][6] means 42/6 since 7*6=42
+	 * This entry is initiated to 10 since 42/6 is considered &quot;hard&quot;.
+	 */
+
+	public void newDivArray(){
+		try{
+			//1. Set all entries to EASY
+<span class="fc bfc" id="L53" title="All 2 branches covered.">			for (int x = 0; x &lt;= 12; x++){</span>
+<span class="fc bfc" id="L54" title="All 2 branches covered.">				for (int y = 0; y &lt;=12; y++){</span>
+<span class="fc" id="L55">					resultArr[x][y] = EASY;</span>
+				}
+			}	
+			
+			//2. Set tables 0-1 to NO_USE
+<span class="fc bfc" id="L60" title="All 2 branches covered.">			for (int x = 0; x &lt;= 12; x++){</span>
+<span class="fc bfc" id="L61" title="All 2 branches covered.">				for (int y = 0; y &lt;= 12; y++){</span>
+<span class="fc bfc" id="L62" title="All 8 branches covered.">					if ((x == 0) || (x == 1) || (y == 0) || (y == 1)) {</span>
+<span class="fc" id="L63">						resultArr[x][y] = NO_USE;</span>
+					}
+				}
+			}	
+			
+			//3. Set tables 3-9 and 12 to MEDIUM
+<span class="fc bfc" id="L69" title="All 2 branches covered.">			for (int x = 0; x &lt;= 12; x++){</span>
+<span class="fc bfc" id="L70" title="All 2 branches covered.">				for (int y = 0; y &lt;= 12; y++){</span>
+<span class="fc bfc" id="L71" title="All 20 branches covered.">					if (((x &gt;= 3) &amp;&amp; (x &lt;= 9) &amp;&amp; (y &gt;= 3) &amp;&amp; (y &lt;= 9))</span>
+							|| ((x == 12) &amp;&amp; (y &gt;= 3) &amp;&amp; (y &lt;= 5))
+							|| ((x &gt;= 3) &amp;&amp; (x &lt;= 5) &amp;&amp; (y == 12))) {
+<span class="fc" id="L74">								resultArr[x][y] = MEDIUM;</span>
+					}
+				}
+			}	
+	
+			//4. Finally, set tables 6-9 and 12 to HARD
+<span class="fc bfc" id="L80" title="All 2 branches covered.">			for (int x = 0; x &lt;= 12; x++){</span>
+<span class="fc bfc" id="L81" title="All 2 branches covered.">				for (int y = 0; y &lt;= 12; y++){</span>
+<span class="fc bfc" id="L82" title="All 20 branches covered.">					if (((((x &gt;= 6) &amp;&amp; (x &lt;= 9)) || (x == 12)) &amp;&amp; (((y &gt;= 6) &amp;&amp; (y &lt;= 9)) || (y == 12)))</span>
+							|| ((x == 11) || (x == 12)) &amp;&amp; ((y == 11) || (y == 12))) {
+<span class="fc" id="L84">								resultArr[x][y] = HARD;</span>
+					}
+				}
+			}	
+<span class="nc" id="L88">		}catch(ArrayIndexOutOfBoundsException e){</span>
+<span class="nc" id="L89">			e.getMessage();</span>
+<span class="fc" id="L90">		}</span>
+		
+<span class="fc" id="L92">}</span>
+	
+	/**
+	 * Presents a new number to calculate by fetching two random integers X and Y both between 2 and 12
+	 * If the number is already cleared, it fetches a new number
+	 * The number to calculate is (X*Y) / X.
+	 * This method is only called if player has not yet cleared all numbers so we should be sure that not all entries are zero
+	 * @return String The value to calculate, formatted as e.g. &quot;64 / 8&quot; 
+	 */
+	public String runGame(){
+<span class="fc" id="L102">		Random rand = new Random();</span>
+		do{
+<span class="fc" id="L104">			currX = rand.nextInt(13);</span>
+<span class="fc" id="L105">			currY = rand.nextInt(13);</span>
+<span class="fc bfc" id="L106" title="All 2 branches covered.">		} while (resultArr[currX][currY] == 0);	</span>
+		
+<span class="fc" id="L108">		Integer prod = currX * currY;		</span>
+<span class="fc" id="L109">		String ret = prod.toString() + &quot; / &quot; + currX.toString();		</span>
+<span class="fc" id="L110">		return ret;</span>
+	}
+	
+	/**
+	 * Checks if the answer entered by the player is correct or not
+	 * If correct answer, the corresponding entry in result matrix is decreased by 1.
+	 * @param answer The answer entered by the player
+	 * @return True if correct answer, otherwise false
+	 */	
+	public boolean checkAnswer(int answer){
+<span class="fc" id="L120">		boolean result = false;</span>
+<span class="fc bfc" id="L121" title="All 2 branches covered.">		if ((answer == currY.intValue())){ </span>
+<span class="fc" id="L122">			resultArr[currX][currY]--;</span>
+<span class="fc" id="L123">			result = true;</span>
+		}		
+<span class="fc" id="L125">		return result;</span>
+	}
+	
+	/**
+	 * Checks if the current number (e.g. 64/8) has been answered correctly a specified number of times. 
+	 * When a number is cleared it will never show again.
+	 * @return True if the number is cleared, otherwise false
+	 */
+	public boolean isCleared(){
+<span class="fc bfc" id="L134" title="All 2 branches covered.">		return (resultArr[currX][currY] == 0);</span>
+	}
+
+	/**
+	 * Returns resultArr. Used in FileHandler class to save the current results in a file when the user quits the game
+	 * @return The result matrix
+	 */
+	public int[][] getResultArr(){
+<span class="fc" id="L142">		return resultArr;</span>
+	}
+	
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.7.201606060606</span></div></body></html>

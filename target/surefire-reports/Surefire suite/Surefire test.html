@@ -1,0 +1,164 @@
+<html>
+<head>
+<title>TestNG:  Surefire test</title>
+<link href="../testng.css" rel="stylesheet" type="text/css" />
+<link href="../my-testng.css" rel="stylesheet" type="text/css" />
+
+<style type="text/css">
+.log { display: none;} 
+.stack-trace { display: none;} 
+</style>
+<script type="text/javascript">
+<!--
+function flip(e) {
+  current = e.style.display;
+  if (current == 'block') {
+    e.style.display = 'none';
+    return 0;
+  }
+  else {
+    e.style.display = 'block';
+    return 1;
+  }
+}
+
+function toggleBox(szDivId, elem, msg1, msg2)
+{
+  var res = -1;  if (document.getElementById) {
+    res = flip(document.getElementById(szDivId));
+  }
+  else if (document.all) {
+    // this is the way old msie versions work
+    res = flip(document.all[szDivId]);
+  }
+  if(elem) {
+    if(res == 0) elem.innerHTML = msg1; else elem.innerHTML = msg2;
+  }
+
+}
+
+function toggleAllBoxes() {
+  if (document.getElementsByTagName) {
+    d = document.getElementsByTagName('div');
+    for (i = 0; i < d.length; i++) {
+      if (d[i].className == 'log') {
+        flip(d[i]);
+      }
+    }
+  }
+}
+
+// -->
+</script>
+
+</head>
+<body>
+<h2 align='center'>Surefire test</h2><table border='1' align="center">
+<tr>
+<td>Tests passed/Failed/Skipped:</td><td>17/0/0</td>
+</tr><tr>
+<td>Started on:</td><td>Mon Nov 07 12:53:34 CET 2016</td>
+</tr>
+<tr><td>Total time:</td><td>0 seconds (352 ms)</td>
+</tr><tr>
+<td>Included groups:</td><td></td>
+</tr><tr>
+<td>Excluded groups:</td><td></td>
+</tr>
+</table><p/>
+<small><i>(Hover the method name to see the test class name)</i></small><p/>
+<table width='100%' border='1' class='invocation-passed'>
+<tr><td colspan='4' align='center'><b>PASSED TESTS</b></td></tr>
+<tr><td><b>Test method</b></td>
+<td width="30%"><b>Exception</b></td>
+<td width="10%"><b>Time (seconds)</b></td>
+<td><b>Instance</b></td>
+</tr>
+<tr>
+<td title='se.examination.otherclasses.DivGameTest.testCheckAnswer_false()'><b>testCheckAnswer_false</b><br>Test class: se.examination.otherclasses.DivGameTest</td>
+<td></td>
+<td>0</td>
+<td>testCheckAnswer_false(se.examination.otherclasses.DivGameTest)</td></tr>
+<tr>
+<td title='se.examination.otherclasses.MultiGameTest.testCheckAnswer_false()'><b>testCheckAnswer_false</b><br>Test class: se.examination.otherclasses.MultiGameTest</td>
+<td></td>
+<td>0</td>
+<td>testCheckAnswer_false(se.examination.otherclasses.MultiGameTest)</td></tr>
+<tr>
+<td title='se.examination.otherclasses.DivGameTest.testCheckAnswer_true()'><b>testCheckAnswer_true</b><br>Test class: se.examination.otherclasses.DivGameTest</td>
+<td></td>
+<td>0</td>
+<td>testCheckAnswer_true(se.examination.otherclasses.DivGameTest)</td></tr>
+<tr>
+<td title='se.examination.otherclasses.MultiGameTest.testCheckAnswer_true()'><b>testCheckAnswer_true</b><br>Test class: se.examination.otherclasses.MultiGameTest</td>
+<td></td>
+<td>0</td>
+<td>testCheckAnswer_true(se.examination.otherclasses.MultiGameTest)</td></tr>
+<tr>
+<td title='se.examination.otherclasses.PlayerTest.testIncreaseCompleted()'><b>testIncreaseCompleted</b><br>Test class: se.examination.otherclasses.PlayerTest</td>
+<td></td>
+<td>0</td>
+<td>testIncreaseCompleted(se.examination.otherclasses.PlayerTest)</td></tr>
+<tr>
+<td title='se.examination.otherclasses.PlayerTest.testIncreasePoints()'><b>testIncreasePoints</b><br>Test class: se.examination.otherclasses.PlayerTest</td>
+<td></td>
+<td>0</td>
+<td>testIncreasePoints(se.examination.otherclasses.PlayerTest)</td></tr>
+<tr>
+<td title='se.examination.otherclasses.MultiGameTest.testIsCleared()'><b>testIsCleared</b><br>Test class: se.examination.otherclasses.MultiGameTest</td>
+<td></td>
+<td>0</td>
+<td>testIsCleared(se.examination.otherclasses.MultiGameTest)</td></tr>
+<tr>
+<td title='se.examination.otherclasses.DivGameTest.testIsCleared_false()'><b>testIsCleared_false</b><br>Test class: se.examination.otherclasses.DivGameTest</td>
+<td></td>
+<td>0</td>
+<td>testIsCleared_false(se.examination.otherclasses.DivGameTest)</td></tr>
+<tr>
+<td title='se.examination.otherclasses.DivGameTest.testIsCleared_true()'><b>testIsCleared_true</b><br>Test class: se.examination.otherclasses.DivGameTest</td>
+<td></td>
+<td>0</td>
+<td>testIsCleared_true(se.examination.otherclasses.DivGameTest)</td></tr>
+<tr>
+<td title='se.examination.otherclasses.DivGameTest.testNewDivArray_getResultArr()'><b>testNewDivArray_getResultArr</b><br>Test class: se.examination.otherclasses.DivGameTest</td>
+<td></td>
+<td>0</td>
+<td>testNewDivArray_getResultArr(se.examination.otherclasses.DivGameTest)</td></tr>
+<tr>
+<td title='se.examination.otherclasses.MultiGameTest.testNewMultArray_getResultArr()'><b>testNewMultArray_getResultArr</b><br>Test class: se.examination.otherclasses.MultiGameTest</td>
+<td></td>
+<td>0</td>
+<td>testNewMultArray_getResultArr(se.examination.otherclasses.MultiGameTest)</td></tr>
+<tr>
+<td title='se.examination.otherclasses.DivGameTest.testRunGame()'><b>testRunGame</b><br>Test class: se.examination.otherclasses.DivGameTest</td>
+<td></td>
+<td>0</td>
+<td>testRunGame(se.examination.otherclasses.DivGameTest)</td></tr>
+<tr>
+<td title='se.examination.otherclasses.MultiGameTest.testRunGame()'><b>testRunGame</b><br>Test class: se.examination.otherclasses.MultiGameTest</td>
+<td></td>
+<td>0</td>
+<td>testRunGame(se.examination.otherclasses.MultiGameTest)</td></tr>
+<tr>
+<td title='se.examination.otherclasses.FileHandlerTest.testSaveDivGameToFile()'><b>testSaveDivGameToFile</b><br>Test class: se.examination.otherclasses.FileHandlerTest</td>
+<td></td>
+<td>0</td>
+<td>testSaveDivGameToFile(se.examination.otherclasses.FileHandlerTest)</td></tr>
+<tr>
+<td title='se.examination.otherclasses.PlayerTest.testSetAndGetCompleted()'><b>testSetAndGetCompleted</b><br>Test class: se.examination.otherclasses.PlayerTest</td>
+<td></td>
+<td>0</td>
+<td>testSetAndGetCompleted(se.examination.otherclasses.PlayerTest)</td></tr>
+<tr>
+<td title='se.examination.otherclasses.PlayerTest.testSetAndGetName()'><b>testSetAndGetName</b><br>Test class: se.examination.otherclasses.PlayerTest</td>
+<td></td>
+<td>0</td>
+<td>testSetAndGetName(se.examination.otherclasses.PlayerTest)</td></tr>
+<tr>
+<td title='se.examination.otherclasses.PlayerTest.testSetAndGetPoints()'><b>testSetAndGetPoints</b><br>Test class: se.examination.otherclasses.PlayerTest</td>
+<td></td>
+<td>0</td>
+<td>testSetAndGetPoints(se.examination.otherclasses.PlayerTest)</td></tr>
+</table><p>
+</body>
+</html>
