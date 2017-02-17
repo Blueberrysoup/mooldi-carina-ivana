@@ -53,7 +53,7 @@ public class MainFrame implements ActionListener{
 	private JTextField textFieldSvar;
 	private JButton btnSluta;
 	private JButton btnOKnext;
-	private final int MAX_MULTI = 679;  	
+	private final int MAX_MULTI = 679; 
 	
 	//DivPage
 	private JPanel divPage = new JPanel();
@@ -67,7 +67,7 @@ public class MainFrame implements ActionListener{
 	private JTextField textFieldSvarDivision;
 	private JButton btnSlutaDivision;
 	private JButton btnOKnextDivision;
-	private final int MAX_DIV = 583;
+	private final int MAX_DIV = 583; 
 
 	//Congratulation page
 	private JPanel congratsPage = new JPanel();
@@ -75,6 +75,8 @@ public class MainFrame implements ActionListener{
 	private JLabel lblDuHarKlarat = new JLabel("");
 	private JButton btnClose = new JButton("St\u00E4ng");
 	private Timer timerCongrats = new Timer(250,null);
+	private JLabel lblProgressMess;
+	private JLabel lblProgressMessDiv;
 
 
 	/**
@@ -205,6 +207,20 @@ public class MainFrame implements ActionListener{
 		lblResultError.setBounds(122, 295, 509, 34);
 		multiPage.add(lblResultError);
 
+		lblProgressMess = new JLabel("");
+		lblProgressMess.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblProgressMess.setForeground(Color.DARK_GRAY);
+		lblProgressMess.setHorizontalAlignment(SwingConstants.CENTER);
+		lblProgressMess.setBounds(29, 342, 673, 35);
+		multiPage.add(lblProgressMess);
+
+		lblProgressMessDiv = new JLabel("");
+		lblProgressMessDiv.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblProgressMessDiv.setForeground(Color.DARK_GRAY);
+		lblProgressMessDiv.setHorizontalAlignment(SwingConstants.CENTER);
+		lblProgressMessDiv.setBounds(29, 342, 673, 35);
+		divPage.add(lblProgressMessDiv);
+
 		//Buttons
 		btnSluta = new JButton("Sluta spela och spara po\u00E4ngen");
 		btnSluta.setBounds(419, 440, 255, 25);
@@ -219,6 +235,7 @@ public class MainFrame implements ActionListener{
 		progressBar.setMaximum(MAX_MULTI);				
 		progressBar.setBounds(70, 437, 200, 14);
 		multiPage.add(progressBar);	
+		
 	}
 	
 	/**
@@ -258,7 +275,7 @@ public class MainFrame implements ActionListener{
 		lblResultErrorDivision.setHorizontalAlignment(SwingConstants.CENTER);
 		lblResultErrorDivision.setBounds(122, 295, 509, 34);
 		divPage.add(lblResultErrorDivision);
-
+		
 		//Buttons
 		btnSlutaDivision = new JButton("Sluta spela och spara po\u00E4ngen");
 		btnSlutaDivision.setBounds(419, 440, 255, 25);
@@ -347,6 +364,16 @@ public class MainFrame implements ActionListener{
 			if ((player.getPoints() < MAX_MULTI) && (player.getCompleted() < 169)){
 				lblResultError.setVisible(false);
 				progressBar.setValue(player.getPoints());
+				
+				if (player.getPoints() > 0) {
+					if (player.getPoints() % 100 == 0)
+						lblProgressMess.setText("Snyggt! 100 nya po\u00E4ng avklarade!");				
+					else if (player.getPoints() == Math.ceil(MAX_MULTI/2))
+						lblProgressMess.setText("H\u00E4rligt, nu är du halvv\u00E4gs!");
+					else 
+						lblProgressMess.setText("");
+				}
+				
 				textFieldSvar.setText("");
 				lblXTalet.setText(game.runGame());
 				if (!timer.isRunning())
@@ -366,6 +393,16 @@ public class MainFrame implements ActionListener{
 			if ((player.getPoints() < MAX_DIV) && (player.getCompleted() < 169)){
 				lblResultErrorDivision.setVisible(false);
 				progressBarDivision.setValue(player.getPoints());
+				
+				if (player.getPoints() > 0) {
+					if (player.getPoints() % 100 == 0)
+						lblProgressMessDiv.setText("Snyggt! 100 nya po\u00E4ng avklarade!");				
+					else if (player.getPoints() == Math.ceil(MAX_DIV/2))
+						lblProgressMessDiv.setText("H\u00E4rligt, nu är du halvv\u00E4gs!");
+					else 
+						lblProgressMessDiv.setText("");
+				}
+				
 				textFieldSvarDivision.setText("");
 				lblXTaletDivision.setText(gameDivision.runGame());
 				if (!timerDiv.isRunning())
