@@ -73,7 +73,7 @@ public class MainFrame implements ActionListener{
 	private JPanel congratsPage = new JPanel();
 	private JLabel lblGrattis = new JLabel("");
 	private JLabel lblDuHarKlarat = new JLabel("");
-	private JButton btnClose = new JButton("Stäng");
+	private JButton btnClose = new JButton("St\u00E4ng");
 	private Timer timerCongrats = new Timer(250,null);
 
 
@@ -135,7 +135,7 @@ public class MainFrame implements ActionListener{
 	 */
 	public void createStartPageGUI(){
 		//Labels and text fields
-		JLabel lblVlkommenTill = new JLabel("Välkommen till");
+		JLabel lblVlkommenTill = new JLabel("V\u00E4lkommen till");
 		lblVlkommenTill.setBounds(325, 91, 103, 15);
 		startPage.add(lblVlkommenTill);
 		
@@ -153,7 +153,7 @@ public class MainFrame implements ActionListener{
 		startPage.add(textFieldName);
 		textFieldName.setColumns(10);
 		
-		JLabel lblVljVadDu = new JLabel("Välj vad du vill träna på:");
+		JLabel lblVljVadDu = new JLabel("V\u00E4lj vad du vill tr\u00E4na p\u00E5:");
 		lblVljVadDu.setBounds(287, 363, 209, 15);
 		startPage.add(lblVljVadDu);
 
@@ -198,7 +198,7 @@ public class MainFrame implements ActionListener{
 		textFieldSvar.requestFocusInWindow();
 		multiPage.add(textFieldSvar);
 				
-		lblResultError = new JLabel("Tyvärr var det fel svar - försök igen!");
+		lblResultError = new JLabel("Tyv\u00E4rr var det fel svar - f\u00F6rs\u00F6k igen!");
 		lblResultError.setFont(new Font("Dialog", Font.BOLD | Font.ITALIC, 18));
 		lblResultError.setForeground(Color.RED);
 		lblResultError.setHorizontalAlignment(SwingConstants.CENTER);
@@ -206,7 +206,7 @@ public class MainFrame implements ActionListener{
 		multiPage.add(lblResultError);
 
 		//Buttons
-		btnSluta = new JButton("Sluta spela och spara poängen");
+		btnSluta = new JButton("Sluta spela och spara po\u00E4ngen");
 		btnSluta.setBounds(419, 440, 255, 25);
 		multiPage.add(btnSluta);
 		
@@ -252,7 +252,7 @@ public class MainFrame implements ActionListener{
 		textFieldSvarDivision.requestFocusInWindow();
 		divPage.add(textFieldSvarDivision);
 				
-		lblResultErrorDivision = new JLabel("Tyvärr var det fel svar - försök igen!");
+		lblResultErrorDivision = new JLabel("Tyv\u00E4rr var det fel svar - f\u00F6rs\u00F6k igen!");
 		lblResultErrorDivision.setFont(new Font("Dialog", Font.BOLD | Font.ITALIC, 18));
 		lblResultErrorDivision.setForeground(Color.RED);
 		lblResultErrorDivision.setHorizontalAlignment(SwingConstants.CENTER);
@@ -260,7 +260,7 @@ public class MainFrame implements ActionListener{
 		divPage.add(lblResultErrorDivision);
 
 		//Buttons
-		btnSlutaDivision = new JButton("Sluta spela och spara poängen");
+		btnSlutaDivision = new JButton("Sluta spela och spara po\u00E4ngen");
 		btnSlutaDivision.setBounds(419, 440, 255, 25);
 		divPage.add(btnSlutaDivision);
 		
