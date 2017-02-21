@@ -10,12 +10,15 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.Random;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 import javax.swing.JTextField;
@@ -107,7 +110,13 @@ public class MainFrame implements ActionListener{
 		frmMooldi = new JFrame();
 		frmMooldi.setTitle("MOOLDI");
 		frmMooldi.setBounds(100, 100, 750, 600);
-		frmMooldi.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		//frmMooldi.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmMooldi.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+		frmMooldi.addWindowListener(new WindowAdapter() {
+		   public void windowClosing(WindowEvent evt) {
+		     onExit();
+		   }
+		});
 		frmMooldi.getContentPane().setLayout(new CardLayout(0, 0));
 		
 		//Create pages
@@ -487,14 +496,26 @@ public class MainFrame implements ActionListener{
 	public void saveGame(){
 		if (gameType == 'm'){
 			fileHandler.saveMultiGameToFile(player, game);	
+			JOptionPane.showMessageDialog(frmMooldi, "Dina po\u00E4ng har sparats", "Spara", JOptionPane.INFORMATION_MESSAGE);
 		}
 		else if (gameType == 'd'){
 			fileHandler.saveDivGameToFile(player, gameDivision);
+			JOptionPane.showMessageDialog(frmMooldi, "Dina po\u00E4ng har sparats", "Spara", JOptionPane.INFORMATION_MESSAGE);
 		}
-		System.exit(0);
+		frmMooldi.dispose();
 	}
 	
-
+	/**
+	 * onExit - Check if user wants to save the result when pressing X-button
+	 */
+	public void onExit() {
+		int answer = JOptionPane.showConfirmDialog(frmMooldi, "Vill du spara innan du avslutar Mooldi?", "Spara", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
+		if (answer == JOptionPane.YES_OPTION)
+			saveGame();
+		else
+			frmMooldi.dispose();
+	}
+			
 	/**
 	 * Action listeners
 	 */	
