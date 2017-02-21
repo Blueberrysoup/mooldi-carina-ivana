@@ -29,6 +29,8 @@ import se.examination.otherclasses.DivGame;
 import se.examination.otherclasses.FileHandler;
 import se.examination.otherclasses.MultiGame;
 import se.examination.otherclasses.Player;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class MainFrame implements ActionListener{
 
@@ -110,9 +112,8 @@ public class MainFrame implements ActionListener{
 		frmMooldi = new JFrame();
 		frmMooldi.setTitle("MOOLDI");
 		frmMooldi.setBounds(100, 100, 750, 600);
-		//frmMooldi.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmMooldi.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-		frmMooldi.addWindowListener(new WindowAdapter() {
+		frmMooldi.addWindowListener(new WindowAdapter() {		//TODO: Kolla om det går att flytta ner till övriga ActionListeners
 		   public void windowClosing(WindowEvent evt) {
 		     onExit();
 		   }
@@ -148,6 +149,17 @@ public class MainFrame implements ActionListener{
 	 * Initialize the contents of start page.
 	 */
 	public void createStartPageGUI(){
+		//Buttons
+		btnMulti = new JButton("Multiplikation");
+		btnMulti.setBounds(192, 397, 143, 25);
+		btnMulti.setEnabled(false);
+		startPage.add(btnMulti);
+		
+		btnDivision = new JButton("Division");
+		btnDivision.setBounds(404, 397, 143, 25);
+		btnDivision.setEnabled(false);
+		startPage.add(btnDivision);
+
 		//Labels and text fields
 		JLabel lblVlkommenTill = new JLabel("V\u00E4lkommen till");
 		lblVlkommenTill.setBounds(325, 91, 103, 15);
@@ -163,6 +175,13 @@ public class MainFrame implements ActionListener{
 		startPage.add(lblSkrivDittNamn);
 		
 		textFieldName = new JTextField();
+		textFieldName.addKeyListener(new KeyAdapter() {   //TODO: Kolla om det går att flytta ner till övriga ActionListeners
+			@Override
+			public void keyTyped(KeyEvent arg0) {
+				btnMulti.setEnabled(true);
+				btnDivision.setEnabled(true);
+			}
+		});
 		textFieldName.setBounds(379, 241, 114, 19);
 		startPage.add(textFieldName);
 		textFieldName.setColumns(10);
@@ -171,14 +190,6 @@ public class MainFrame implements ActionListener{
 		lblVljVadDu.setBounds(287, 363, 209, 15);
 		startPage.add(lblVljVadDu);
 
-		//Buttons
-		btnMulti = new JButton("Multiplikation");
-		btnMulti.setBounds(192, 397, 143, 25);
-		startPage.add(btnMulti);
-		
-		btnDivision = new JButton("Division");
-		btnDivision.setBounds(404, 397, 143, 25);
-		startPage.add(btnDivision);
 	}
 
 	/**
