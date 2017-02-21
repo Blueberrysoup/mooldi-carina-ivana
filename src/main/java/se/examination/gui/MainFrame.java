@@ -50,6 +50,7 @@ public class MainFrame implements ActionListener{
 	private JLabel lblXTalet;
 	private JLabel lblCompleted;
 	private JLabel lblResultError;
+	private JLabel lblProgressMess;
 	private JTextField textFieldSvar;
 	private JButton btnSluta;
 	private JButton btnOKnext;
@@ -64,6 +65,7 @@ public class MainFrame implements ActionListener{
 	private JLabel lblXTaletDivision;
 	private JLabel lblCompletedDivision;
 	private JLabel lblResultErrorDivision;
+	private JLabel lblProgressMessDiv;
 	private JTextField textFieldSvarDivision;
 	private JButton btnSlutaDivision;
 	private JButton btnOKnextDivision;
@@ -75,8 +77,9 @@ public class MainFrame implements ActionListener{
 	private JLabel lblDuHarKlarat = new JLabel("");
 	private JButton btnClose = new JButton("St\u00E4ng");
 	private Timer timerCongrats = new Timer(250,null);
-	private JLabel lblProgressMess;
-	private JLabel lblProgressMessDiv;
+	private JButton btnNewMulti = new JButton("Multiplikation");
+	private JButton btnNewDiv = new JButton("Division");
+	private JLabel lblVillDuSpela = new JLabel("Vill du spela igen?");
 
 
 	/**
@@ -309,10 +312,24 @@ public class MainFrame implements ActionListener{
 		lblDuHarKlarat.setBounds(71, 236, 626, 100);
 		congratsPage.add(lblDuHarKlarat);
 		
+		lblVillDuSpela.setHorizontalAlignment(SwingConstants.CENTER);
+		lblVillDuSpela.setBounds(298, 402, 167, 16);
+		congratsPage.add(lblVillDuSpela);
+		
 		btnClose.setForeground(Color.BLACK);
 		btnClose.setBackground(Color.WHITE);
-		btnClose.setBounds(319, 447, 117, 25);
+		btnClose.setBounds(478, 447, 120, 25);
 		congratsPage.add(btnClose);
+		
+		btnNewMulti.setForeground(Color.BLACK);
+		btnNewMulti.setBackground(Color.WHITE);
+		btnNewMulti.setBounds(172, 447, 120, 25);
+		congratsPage.add(btnNewMulti);
+		
+		btnNewDiv.setForeground(Color.BLACK);
+		btnNewDiv.setBackground(Color.WHITE);
+		btnNewDiv.setBounds(324, 447, 120, 25);
+		congratsPage.add(btnNewDiv);
 	}
 
 	/**
@@ -321,12 +338,13 @@ public class MainFrame implements ActionListener{
 	 * Show multiplication page with data from the saved file (if it exists).
 	 */
 	public void onClickMulti(){
-		player.setName(textFieldName.getText());
+		if (player.getName() == "")
+			player.setName(textFieldName.getText());
 		
 		if (!fileHandler.startMultiGame(player, game)) 			//if this user not already has an ongoing game			
 			game.newMultArray();
 		
-		lblHejNamn.setText("Hej " + textFieldName.getText() + "!");
+		lblHejNamn.setText("Hej " + player.getName() + "!");
 		lblCompleted.setText("Du har klarat av totalt " + player.getPoints() + " av " + MAX_MULTI + " tal.");
 	
 		startPage.setVisible(false);
@@ -341,12 +359,13 @@ public class MainFrame implements ActionListener{
 	 * Show division page with data from the saved file (if it exists).
 	 */
 	public void onClickDivision(){
-		player.setName(textFieldName.getText());
+		if (player.getName() == "")
+			player.setName(textFieldName.getText());
 		
 		if (!fileHandler.startDivGame(player, gameDivision)) 	//if this user not already has an ongoing game			
 			gameDivision.newDivArray();
 		
-		lblHejNamnDivision.setText("Hej " + textFieldName.getText() + "!");
+		lblHejNamnDivision.setText("Hej " + player.getName() + "!");
 		lblCompletedDivision.setText("Du har klarat av totalt " + player.getPoints() + " av " + MAX_DIV + " tal.");
 		
 		startPage.setVisible(false);
@@ -498,6 +517,8 @@ public class MainFrame implements ActionListener{
 		
 		//CongratsPage
 		btnClose.addActionListener(this);
+		btnNewDiv.addActionListener(this);
+		btnNewMulti.addActionListener(this);
 		timerCongrats.addActionListener(this);
 		
 	}
@@ -515,6 +536,24 @@ public class MainFrame implements ActionListener{
 		if (e.getSource() == btnDivision) {
 			gameType = 'd';
 			onClickDivision();			
+		}
+		
+		//CongratsPage
+		if (e.getSource() == btnNewMulti) {
+			gameType = 'm';
+			fileHandler.deleteGameFile(player, gameType);
+			player.setCompleted(0);
+			player.setPoints(0);
+			congratsPage.setVisible(false);
+			onClickMulti();			
+		}
+		if (e.getSource() == btnNewDiv) {
+			gameType = 'd';
+			fileHandler.deleteGameFile(player, gameType);
+			player.setCompleted(0);
+			player.setPoints(0);
+			congratsPage.setVisible(false);
+			onClickDivision();						
 		}
 		
 		//MultiPage

@@ -1,6 +1,6 @@
 /***
 * FileHandler - Methods for handling saved game data - Mooldi application
-* @authors: Carina Ekström, Ivana Zdjuic
+* @authors: Carina Ekstrom, Ivana Zdjuic
 * @version: 1.0
 **/
 package se.examination.otherclasses;
@@ -90,6 +90,23 @@ public class FileHandler {
 
 	}
 
+	/**
+	 * Deletes the file for a specific user and gametype. 
+	 * @param player The current Player object
+	 * @param gameType The current gametype (m = multi, d = div)
+	 */
+	public boolean deleteGameFile(Player player, char gameType){
+		String extension = "";
+		if (gameType == 'm')
+			extension = "_multi.txt";
+		else if (gameType == 'd')
+			extension = "_div.txt";
+		
+		String fileName = "gamefiles/" + player.getName() + extension; 
+		File file = new File(fileName);
+		return file.delete();
+	}
+	
 	/**
 	 * Checks if a file NAME_multi.txt exists. If so, reads the file 
 	 * and saves the values as current player's results.
